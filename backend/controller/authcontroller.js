@@ -2,6 +2,18 @@ import userModel from "../model/user.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
+/* =========================
+   GENERATE TOKEN
+========================= */
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: "7d",
+  });
+};
+
+/* =========================
+   REGISTER
+========================= */
 export const register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -9,13 +21,12 @@ export const register = async (req, res) => {
     if (!name || !email || !password) {
       return res.status(400).json({
         success: false,
-        message: "Something is missing",
+        message: "All fields required",
       });
     }
 
-    const existinguser = await userModel.findOne({ email });
-
-    if (existinguser) {
+    const exists = await userModel.findOne({ email });
+    if (exists) {
       return res.status(400).json({
         success: false,
         message: "User already exists",
@@ -24,43 +35,37 @@ export const register = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newuser = await userModel.create({
+    const user = await userModel.create({
       name,
       email,
       password: hashedPassword,
     });
 
-    const token = jwt.sign(
-      { id: newuser._id },
-      process.env.JWT_SECRET,
-      { expiresIn: "7d" }
-    );
+    const token = generateToken(user._id);
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+      secure: true,
+      sameSite: "none",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    // ✅ password hidden
-    const { password: _, ...safeUser } = newuser.toObject();
+    const { password: _, ...safeUser } = user.toObject();
 
     return res.status(201).json({
       success: true,
-      message: "User Registered",
-      token,
       user: safeUser,
+      message: "User registered",
     });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({
-      success: false,
-      message: "Internal server error",
-    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 };
 
+/* =========================
+   LOGIN
+========================= */
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -68,72 +73,91 @@ export const login = async (req, res) => {
     if (!email || !password) {
       return res.status(400).json({
         success: false,
-        message: "Missing Details",
+        message: "All fields required",
       });
     }
 
     const user = await userModel.findOne({ email });
 
     if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: "Email does not exist",
-      });
-    }
-
-    const isMatch = await bcrypt.compare(password, user.password);
-
-    if (!isMatch) {
       return res.status(400).json({
         success: false,
-        message: "Invalid Password",
+        message: "User not found",
       });
     }
 
-    const token = jwt.sign(
-      { id: user._id },
-      process.env.JWT_SECRET,
-      { expiresIn: "7d" }
-    );
+    const match = await bcrypt.compare(password, user.password);
+
+    if (!match) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid credentials",
+      });
+    }
+
+    const token = generateToken(user._id);
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+      secure: true,
+      sameSite: "none",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    // ✅ password hidden
     const { password: _, ...safeUser } = user.toObject();
 
     return res.status(200).json({
       success: true,
-      message: "Login Successful",
-      token,
       user: safeUser,
+      message: "Login successful",
     });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({
-      success: false,
-      message: "Internal server error",
-    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 };
 
+/* =========================
+   LOGOUT
+========================= */
 export const logout = async (req, res) => {
   try {
-    res.clearCookie("token");
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    });
 
     return res.status(200).json({
       success: true,
-      message: "Logged Out",
+      message: "Logged out",
     });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({
-      success: false,
-      message: "Internal server error",
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+/* =========================
+   GET ME (IMPORTANT)
+========================= */
+export const getMe = async (req, res) => {
+  try {
+    const user = await userModel.findById(req.user.id).select("-password");
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      user,
     });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 };

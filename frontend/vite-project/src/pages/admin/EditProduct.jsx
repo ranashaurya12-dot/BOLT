@@ -20,7 +20,7 @@ const EditProduct = () => {
 const getProduct = async () => {
   try {
     const { data } = await axios.get(
-      `http://localhost:4000/api/product/single-product/${id}`
+      `https://bolt-cfp7.onrender.com/api/product/single-product/${id}`
     );
 
     if (data.success) {
@@ -50,7 +50,7 @@ const handleSubmit = async (e) => {
     setLoading(true);
 
     const { data } = await axios.put(
-      `http://localhost:4000/api/admin/product/${id}`,
+      `https://bolt-cfp7.onrender.com/api/admin/product/${id}`,
       formData,
       {
         withCredentials: true,

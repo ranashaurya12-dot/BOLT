@@ -16,7 +16,7 @@ function Login() {
     try {
       setLoading(true);
       const response = await axios.post(
-        "http://localhost:4000/api/auth/login",
+        "https://bolt-cfp7.onrender.com/api/auth/login",
         { email, password },
         { withCredentials: true }
       );

@@ -23,7 +23,7 @@ const getOrders = async () => {
     setLoading(true);
 
     const { data } = await axios.get(
-      "http://localhost:4000/api/admin/orders",
+      "https://bolt-cfp7.onrender.com/api/admin/orders",
       { withCredentials: true }
     );
 
@@ -41,7 +41,7 @@ const getOrders = async () => {
 const updateStatus = async (id, status) => {
   try {
     const { data } = await axios.put(
-      `http://localhost:4000/api/admin/order/${id}`,
+      `https://bolt-cfp7.onrender.com/api/admin/order/${id}`,
       { status },
       { withCredentials: true }
     );

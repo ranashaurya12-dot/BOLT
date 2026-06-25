@@ -9,7 +9,7 @@ const AdminUsers = () => {
   const getUsers = async () => {
     try {
       const { data } = await axios.get(
-   "http://localhost:4000/api/admin/users",
+   "https://bolt-cfp7.onrender.com/api/admin/users",
         { withCredentials: true }
       );
       if (data.success) {
@@ -27,7 +27,7 @@ const AdminUsers = () => {
     if (!window.confirm("Are you sure you want to delete this user?")) return;
     try {
       const { data } = await axios.delete(
-        `http://localhost:4000/api/admin/user/${id}`,
+        `https://bolt-cfp7.onrender.com/api/admin/user/${id}`,
         { withCredentials: true }
       );
       if (data.success) {

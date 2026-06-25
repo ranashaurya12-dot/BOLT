@@ -16,7 +16,7 @@ function Navbar() {
   const logoutHandler = async () => {
     try {
       await axios.post(
-         "http://localhost:4000/api/auth/logout",
+         "https://bolt-cfp7.onrender.com/api/auth/logout",
         {},
         { withCredentials: true }
       );

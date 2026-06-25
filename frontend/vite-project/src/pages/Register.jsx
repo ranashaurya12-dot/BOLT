@@ -19,7 +19,7 @@ const {setUser}=useContext(AuthContext);
     try {
 
       const response = await axios.post(
-       "http://localhost:4000/api/auth/register",
+       "https://bolt-cfp7.onrender.com/api/auth/register",
         {
           name,
           email,

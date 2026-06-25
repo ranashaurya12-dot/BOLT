@@ -11,7 +11,7 @@ const AdminProducts = () => {
 const getProducts = async () => {
   try {
     const { data } = await axios.get(
-      "http://localhost:4000/api/admin/products",
+      "https://bolt-cfp7.onrender.com/api/admin/products",
       { withCredentials: true }
     );
 
@@ -31,7 +31,7 @@ const deleteProduct = async (id) => {
 
   try {
     const { data } = await axios.delete(
-      `http://localhost:4000/api/admin/product/${id}`,
+      `https://bolt-cfp7.onrender.com/api/admin/product/${id}`,
       { withCredentials: true }
     );
 

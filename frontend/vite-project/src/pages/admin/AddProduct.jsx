@@ -28,7 +28,7 @@ const AddProduct = () => {
     try {
       setLoading(true);
       const { data } = await axios.post(
-       "http://localhost:4000/api/admin/add-product",
+       "https://bolt-cfp7.onrender.com/api/admin/add-product",
         formData,
         { withCredentials: true }
       );

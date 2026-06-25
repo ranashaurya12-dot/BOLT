@@ -14,7 +14,7 @@ function ProductDetails() {
   useEffect(() => {
     const fetchProduct = async () => {
       const response = await axios.get(
-       `http://localhost:4000/api/product/single-product/${id}`
+       `https://bolt-cfp7.onrender.com/api/product/single-product/${id}`
       )
       setProduct(response.data.product)
     }
@@ -30,7 +30,7 @@ function ProductDetails() {
     try {
       setLoading(true)
       const response = await axios.post(
-        "http://localhost:4000/api/cart/add-cart",
+        "https://bolt-cfp7.onrender.com/api/cart/add-cart",
         { productId: product._id, quantity: 1 },
         { withCredentials: true }
       )

@@ -10,7 +10,7 @@ const AdminDashboard = () => {
   const getStats = async () => {
     try {
       const { data } = await axios.get(
-       "http://localhost:4000/api/admin/stats",
+       "https://bolt-cfp7.onrender.com/api/admin/stats",
         { withCredentials: true }
       );
       if (data.success) {

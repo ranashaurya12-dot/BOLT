@@ -11,7 +11,7 @@ function Shop() {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/product/products",
+        "https://bolt-cfp7.onrender.com/api/product/products",
         {
           params: { search, category, sort },
         }

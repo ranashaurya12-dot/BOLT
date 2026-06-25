@@ -13,7 +13,7 @@ function Orders() {
   const fetchOrders = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/order/my-orders",
+        "https://bolt-cfp7.onrender.com/api/order/my-orders",
         { withCredentials: true }
       );
 
@@ -39,7 +39,7 @@ function Orders() {
   const cancelOrder = async (orderId) => {
     try {
       const response = await axios.put(
-        `http://localhost:4000/api/order/cancel-order/${orderId}`,
+        `https://bolt-cfp7.onrender.com/api/order/cancel-order/${orderId}`,
         {},
         { withCredentials: true }
       );

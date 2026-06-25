@@ -14,7 +14,7 @@ function Cart() {
   const fetchCart = async () => {
     try {
       const response = await axios.get(
-       "http://localhost:4000/api/cart/get-cart",
+       "https://bolt-cfp7.onrender.com/api/cart/get-cart",
         { withCredentials: true }
       )
       setCartItems(response.data.cart)
@@ -37,7 +37,7 @@ function Cart() {
     if (quantity < 1) return
     try {
       await axios.put(
-        `http://localhost:4000/api/cart/update-cart/${cartId}`,
+        `https://bolt-cfp7.onrender.com/api/cart/update-cart/${cartId}`,
         { quantity },
         { withCredentials: true }
       )
@@ -50,7 +50,7 @@ function Cart() {
   const removeItem = async (cartId) => {
     try {
       await axios.delete(
-       `http://localhost:4000/api/cart/delete-cart/${cartId}`,
+       `https://bolt-cfp7.onrender.com/api/cart/delete-cart/${cartId}`,
         { withCredentials: true }
       )
       toast.success("Item Removed")
@@ -64,7 +64,7 @@ function Cart() {
     try {
       setLoading(true)
       const response = await axios.post(
-        "http://localhost:4000/api/order/place-order",
+        "https://bolt-cfp7.onrender.com/api/order/place-order",
         {},
         { withCredentials: true }
       )
