@@ -34,82 +34,88 @@ function Login() {
     }
   };
 
-  return (
-    <div className="min-h-screen bg-gray-950 flex items-center justify-center px-4">
+ return (
+  <div className="min-h-screen bg-[#0D0B09] flex items-center justify-center px-4 relative overflow-hidden">
 
-      {/* Background glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+    {/* Background glow */}
+    <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-96 h-96 bg-[#EEBA02]/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="w-full max-w-md z-10">
+    <div className="w-full max-w-md z-10">
 
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">
-            VOLTRA
-          </h1>
-          <p className="text-gray-400 mt-2">
-            Welcome back! Login to continue
-          </p>
+      {/* Logo */}
+      <div className="text-center mb-10">
+        <h1 className="font-['Oswald'] text-5xl font-bold italic uppercase tracking-tight text-[#EEBA02]">
+          VOLTRA
+        </h1>
+        <div className="w-20 h-[2px] bg-[#8C7437] mx-auto mt-4"></div>
+        <p className="text-[#9C9589] mt-4 text-base">
+          Welcome back! Login to continue
+        </p>
+      </div>
+
+      {/* Form */}
+      <form
+        onSubmit={submitHandler}
+        className="bg-[#15120F] border border-[#2C2418] rounded-lg p-8 shadow-[0_20px_60px_rgba(0,0,0,0.55)]"
+      >
+        <h2 className="font-['Oswald'] text-4xl font-bold italic uppercase tracking-tight text-[#F5F1E8] mb-8">
+          Login
+        </h2>
+
+        {/* Email */}
+        <div className="mb-6">
+          <label className="block font-['Oswald'] text-xs uppercase tracking-[2px] text-[#8C7437] mb-2">
+            Email Address
+          </label>
+
+          <input
+            type="email"
+            placeholder="you@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="w-full rounded-lg border border-[#2C2418] bg-[#0D0B09] p-4 text-[#F5F1E8] placeholder-[#6F685C] outline-none transition-all duration-300 focus:border-[#EEBA02]"
+          />
         </div>
 
-        {/* Form */}
-        <form
-          onSubmit={submitHandler}
-          className="bg-gray-900 border border-gray-800 p-8 rounded-3xl shadow-2xl"
+        {/* Password */}
+        <div className="mb-8">
+          <label className="block font-['Oswald'] text-xs uppercase tracking-[2px] text-[#8C7437] mb-2">
+            Password
+          </label>
+
+          <input
+            type="password"
+            placeholder="••••••••"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className="w-full rounded-lg border border-[#2C2418] bg-[#0D0B09] p-4 text-[#F5F1E8] placeholder-[#6F685C] outline-none transition-all duration-300 focus:border-[#EEBA02]"
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full rounded-lg bg-[#EEBA02] py-4 text-lg font-bold text-black transition-all duration-300 hover:scale-[1.02] hover:bg-[#FFD35C] disabled:opacity-50"
         >
-          <h2 className="text-3xl font-black text-white mb-8">
-            Login
-          </h2>
+          {loading ? "Logging in..." : "Login"}
+        </button>
 
-          {/* Email */}
-          <div className="mb-5">
-            <label className="block text-gray-400 text-sm font-medium mb-2">
-              Email Address
-            </label>
-            <input
-              type="email"
-              placeholder="you@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="w-full bg-gray-800 border border-gray-700 text-white p-4 rounded-xl outline-none focus:border-blue-500 transition placeholder-gray-600"
-            />
-          </div>
-
-          {/* Password */}
-          <div className="mb-8">
-            <label className="block text-gray-400 text-sm font-medium mb-2">
-              Password
-            </label>
-            <input
-              type="password"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full bg-gray-800 border border-gray-700 text-white p-4 rounded-xl outline-none focus:border-blue-500 transition placeholder-gray-600"
-            />
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-500 text-white py-4 rounded-xl text-lg font-bold transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-blue-500/20 disabled:opacity-50"
+        <p className="text-center mt-6 text-[#9C9589]">
+          Don't have an account?{" "}
+          <Link
+            to="/register"
+            className="font-semibold text-[#EEBA02] transition-colors duration-300 hover:text-[#FFD35C]"
           >
-            {loading ? "Logging in..." : "Login"}
-          </button>
+            Register
+          </Link>
+        </p>
+      </form>
 
-          <p className="text-center mt-6 text-gray-500">
-            Don't have an account?{" "}
-            <Link to="/register" className="text-blue-500 hover:text-blue-400 font-semibold">
-              Register
-            </Link>
-          </p>
-        </form>
-
-      </div>
     </div>
-  );
+  </div>
+);
 }
 
 export default Login;

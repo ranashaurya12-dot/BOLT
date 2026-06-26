@@ -53,89 +53,93 @@ function ProductCard({ product }) {
     : null;
 
   return (
-    <div
-      onClick={handleCardClick}
-      className="group bg-gray-900 border border-gray-800 rounded-3xl overflow-hidden hover:border-blue-500/50 hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 cursor-pointer"
-    >
-      {/* Image */}
-      <div className="relative overflow-hidden h-72">
-       {/* <img
-  src={product.image}
-  alt={product.name}
-  loading="lazy"
-  decoding="async"
-  className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-500"
-/> */}
+  <div
+    onClick={handleCardClick}
+    className="group bg-[#15120F] border border-[#2C2418] rounded-lg overflow-hidden hover:border-[#EEBA02] transition-all duration-300 cursor-pointer"
+  >
 
-        {/* Discount badge */}
-        {discountPercent && (
-          <div className="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">
-            {discountPercent}% OFF
-          </div>
-        )}
+    {/* Image */}
+    <div className="relative h-60 bg-[#0F0D0B] flex items-center justify-center border-b border-[#2C2418]">
 
-        {/* Out of stock overlay */}
-        {product.stock === 0 && (
-          <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
-            <span className="bg-red-500 text-white px-6 py-2 rounded-full font-bold">
-              Out Of Stock
-            </span>
-          </div>
-        )}
+      <img
+        src={product.image}
+        alt={product.name}
+        className="h-44 object-contain group-hover:scale-105 transition duration-300"
+      />
 
-        {/* Low stock badge */}
-        {product.stock > 0 && product.stock <= 5 && (
-          <div className="absolute top-4 right-4 bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold">
-            Only {product.stock} left!
-          </div>
-        )}
+      <div className="absolute top-3 left-3 text-[10px] uppercase px-2 py-1 border border-[#8C7437] text-[#EEBA02] tracking-wider">
+        {product.category}
       </div>
 
-      {/* Content */}
-      <div className="p-6">
-        <p className="text-blue-500 font-semibold uppercase tracking-wider text-sm">
-          {product.category}
-        </p>
-
-        <h2 className="text-xl font-black text-white mt-2 leading-tight">
-          {product.name}
-        </h2>
-
-        <p className="text-gray-500 text-sm mt-2 line-clamp-2">
-          {product.description}
-        </p>
-
-        {/* Price */}
-        <div className="flex items-center gap-3 mt-4">
-          <p className="text-2xl text-blue-500 font-black">
-            ₹{product.price}
-          </p>
-          {product.discountPrice > 0 && (
-            <p className="line-through text-gray-600 text-sm">
-              ₹{product.discountPrice}
-            </p>
-          )}
+      {discountPercent && (
+        <div className="absolute top-3 right-3 bg-[#EEBA02] text-black text-xs font-bold px-2 py-1">
+          {discountPercent}% OFF
         </div>
+      )}
 
-        {/* Button */}
-        <button
-          onClick={handleAddToCart}
-          disabled={loading || product.stock === 0}
-          className={`w-full py-3 rounded-xl mt-5 font-bold transition-all duration-300
-            ${product.stock === 0
-              ? "bg-gray-800 text-gray-500 cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-500 text-white hover:scale-[1.02] shadow-lg shadow-blue-500/20"
-            } disabled:opacity-50`}
-        >
-          {product.stock === 0
-            ? "Out Of Stock"
-            : loading
-            ? "Adding..."
-            : "Add To Cart"}
-        </button>
-      </div>
     </div>
-  );
+
+    {/* Content */}
+    <div className="p-5">
+
+      <h2
+        style={{ fontFamily: "Oswald, sans-serif" }}
+        className="text-2xl italic uppercase text-[#F5F1E8]"
+      >
+        {product.name}
+      </h2>
+
+      <p className="text-[#9C9589] text-sm mt-3 line-clamp-2 h-10">
+        {product.description}
+      </p>
+
+      <div className="flex items-center gap-3 mt-5">
+
+        <p className="text-2xl font-bold text-[#EEBA02]">
+          ₹{product.price}
+        </p>
+
+        {product.discountPrice > 0 && (
+          <p className="line-through text-[#7E7668]">
+            ₹{product.discountPrice}
+          </p>
+        )}
+
+      </div>
+
+      {product.stock <= 5 && product.stock > 0 && (
+        <p className="text-[#EEBA02] text-xs mt-3 uppercase">
+          Only {product.stock} Left
+        </p>
+      )}
+
+      {product.stock === 0 && (
+        <p className="text-red-400 text-xs mt-3 uppercase">
+          Out Of Stock
+        </p>
+      )}
+
+      <button
+        onClick={handleAddToCart}
+        disabled={loading || product.stock === 0}
+        className={`w-full mt-6 py-3 uppercase font-bold tracking-wider transition
+        ${
+          product.stock === 0
+            ? "bg-[#2A2A2A] text-gray-500 cursor-not-allowed"
+            : "bg-[#EEBA02] text-black hover:bg-[#FFD35C]"
+        }`}
+      >
+        {loading
+          ? "ADDING..."
+          : product.stock === 0
+          ? "OUT OF STOCK"
+          : "ADD TO CART"}
+      </button>
+
+    </div>
+
+  </div>
+);
 }
 
 export default ProductCard;

@@ -42,61 +42,87 @@ function Categories() {
     },
   ];
 
-  return (
-    <section className="bg-gray-950 py-24 px-6 md:px-16">
+ return (
+  <section className="bg-[#0D0B09] py-24 px-6 md:px-16">
 
-      {/* Header */}
-      <div className="text-center mb-16">
-        <p className="text-blue-500 uppercase tracking-widest text-sm font-semibold mb-3">
-          Browse Our Range
-        </p>
-        <h1 className="text-5xl md:text-6xl font-black text-white">
-          Shop By Category
-        </h1>
-        <p className="text-gray-400 mt-4 text-lg max-w-xl mx-auto">
-          Find the perfect supplement for your fitness goals
-        </p>
-      </div>
+    {/* Header */}
+    <div className="text-center mb-16">
 
-      {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        {categories.map((category, index) => (
-          <div
-            key={index}
-            onClick={() =>
-              navigate(`/shop?category=${category.name}`)
-            }
-            className="group relative bg-gray-900 border border-gray-800 rounded-3xl p-8 cursor-pointer hover:border-blue-500/50 hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 overflow-hidden"
+      <p className="uppercase tracking-[4px] text-[#EEBA02] text-sm font-semibold mb-3">
+        ELITE COLLECTION
+      </p>
+
+      <h1
+        style={{ fontFamily: "Oswald, sans-serif" }}
+        className="text-5xl md:text-7xl italic uppercase font-bold text-[#F5F1E8]"
+      >
+        Shop By Category
+      </h1>
+
+      <div className="w-24 h-1 bg-[#EEBA02] mx-auto mt-5 rounded-full"></div>
+
+      <p className="text-[#9C9589] mt-6 text-lg max-w-2xl mx-auto">
+        Choose supplements engineered for strength, recovery and peak
+        athletic performance.
+      </p>
+
+    </div>
+
+    {/* Cards */}
+
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+
+      {categories.map((category, index) => (
+
+        <div
+          key={index}
+          onClick={() => navigate(`/shop?category=${category.name}`)}
+          className="group bg-[#1A1713] border border-[#2C2418] rounded-xl p-8 cursor-pointer hover:border-[#EEBA02] hover:-translate-y-2 transition-all duration-300"
+        >
+
+          {/* Icon */}
+
+          <div className="text-6xl text-[#EEBA02] mb-6 transition duration-300 group-hover:scale-110">
+            {category.icon}
+          </div>
+
+          {/* Name */}
+
+          <h2
+            style={{ fontFamily: "Oswald, sans-serif" }}
+            className="text-3xl italic uppercase font-bold text-[#F5F1E8]"
           >
-            {/* Background gradient on hover */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-3xl`} />
+            {category.name}
+          </h2>
 
-            {/* Icon */}
-            <div className="text-6xl mb-5 group-hover:scale-110 transition-transform duration-300">
-              {category.icon}
-            </div>
+          {/* Description */}
 
-            {/* Content */}
-            <h2 className="text-2xl font-black text-white">
-              {category.name}
-            </h2>
+          <p className="text-[#9C9589] mt-4 leading-7">
+            {category.desc}
+          </p>
 
-            <p className="text-gray-400 mt-2">
-              {category.desc}
-            </p>
+          {/* Button */}
 
-            {/* Arrow */}
-            <div className="mt-6 flex items-center gap-2 text-blue-500 font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <span>Shop Now</span>
-              <span>→</span>
+          <div className="mt-8 flex items-center justify-between">
+
+            <span className="uppercase tracking-wider text-sm text-[#EEBA02] font-semibold">
+              Explore
+            </span>
+
+            <div className="w-10 h-10 rounded-full border border-[#EEBA02] flex items-center justify-center text-[#EEBA02] group-hover:bg-[#EEBA02] group-hover:text-black transition">
+              →
             </div>
 
           </div>
-        ))}
-      </div>
 
-    </section>
-  );
+        </div>
+
+      ))}
+
+    </div>
+
+  </section>
+);
 }
 
 export default Categories;

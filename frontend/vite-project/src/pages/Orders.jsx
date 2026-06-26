@@ -65,133 +65,174 @@ function Orders() {
 
   if (activeOrders.length === 0) {
     return (
-      <div className="bg-gray-100 min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-5xl font-bold mb-6">No Orders Yet</h1>
+  <div className="min-h-screen bg-[#0D0B09] flex items-center justify-center px-4">
+    <div className="bg-[#15120F] border border-[#2C2418] rounded-lg p-12 max-w-lg w-full text-center shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
 
-          <button
-            onClick={() => navigate("/shop")}
-            className="bg-blue-500 text-white px-10 py-4 rounded-xl hover:bg-blue-600 transition"
-          >
-            Start Shopping
-          </button>
-        </div>
-      </div>
-    );
+      <h1 className="font-['Oswald'] text-5xl font-bold italic uppercase tracking-tight text-[#F5F1E8]">
+        No Orders Yet
+      </h1>
+
+      <p className="mt-4 text-[#9C9589]">
+        Your premium supplement orders will appear here.
+      </p>
+
+      <button
+        onClick={() => navigate("/shop")}
+        className="mt-8 bg-[#EEBA02] hover:bg-[#FFD35C] text-black px-8 py-4 rounded-lg font-bold transition-all duration-300"
+      >
+        Start Shopping
+      </button>
+
+    </div>
+  </div>
+);
   }
 
-  return (
-    <div className="bg-gray-100 min-h-screen px-10 py-20">
-      <h1 className="text-5xl font-bold mb-12">My Orders</h1>
+return (
+  <div className="min-h-screen bg-[#0D0B09] px-6 py-14 md:px-10 lg:px-16">
 
-      <div className="space-y-8">
-        {activeOrders.map((order) => (
-          <div
-            key={order._id}
-            className="bg-white p-8 rounded-3xl shadow-lg"
-          >
-            {/* Header */}
-            <div className="flex justify-between items-center mb-6">
-              <div>
-                <p className="text-gray-400 text-sm">Order ID</p>
-                <p className="font-semibold">
-                  #{order._id.slice(-8).toUpperCase()}
-                </p>
-              </div>
+    {/* Header */}
+    <div className="mb-12 border-b border-[#2C2418] pb-8">
+      <p className="font-['Oswald'] text-sm uppercase italic tracking-[8px] text-[#8C7437]">
+        Premium Orders
+      </p>
 
-              <div>
-                <p className="text-gray-400 text-sm">Date</p>
-                <p className="font-semibold">
-                  {new Date(order.createdAt).toLocaleDateString()}
-                </p>
-              </div>
-
-              <div>
-                <p className="text-gray-400 text-sm">Total</p>
-                <p className="font-semibold text-blue-500 text-xl">
-                  ₹{order.totalAmount}
-                </p>
-              </div>
-
-              <span
-                className={`px-6 py-2 rounded-full font-semibold text-white
-                  ${order.status === "Pending" ? "bg-yellow-500" : ""}
-                  ${order.status === "Shipped" ? "bg-blue-500" : ""}
-                  ${order.status === "Delivered" ? "bg-green-500" : ""}
-                  ${order.status === "Cancelled" ? "bg-red-500" : ""}
-                `}
-              >
-                {order.status}
-              </span>
-
-              {order.status === "Pending" && (
-                <button
-                  onClick={() => cancelOrder(order._id)}
-                  className="border border-red-500 text-red-500 px-6 py-2 rounded-full hover:bg-red-500 hover:text-white transition"
-                >
-                  Cancel
-                </button>
-              )}
-            </div>
-
-            {/* Products */}
-            <div className="space-y-4 border-t pt-6">
-              {order.products.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-6"
-                >
-                  {item.product ? (
-                    <>
-                      <img
-                        src={item.product.image}
-                        alt={item.product.name}
-                        className="w-20 h-20 object-cover rounded-xl"
-                      />
-
-                      <div className="flex-1">
-                        <h2 className="text-xl font-bold">
-                          {item.product.name}
-                        </h2>
-
-                        <p className="text-gray-400">
-                          Quantity: {item.quantity}
-                        </p>
-                      </div>
-
-                      <p className="text-blue-500 font-bold text-xl">
-                        ₹{item.product.price * item.quantity}
-                      </p>
-                    </>
-                  ) : (
-                    <>
-                      <div className="w-20 h-20 rounded-xl bg-gray-200 flex items-center justify-center">
-                        ❌
-                      </div>
-
-                      <div className="flex-1">
-                        <h2 className="text-xl font-bold text-red-500">
-                          Product Deleted
-                        </h2>
-
-                        <p className="text-gray-400">
-                          Quantity: {item.quantity}
-                        </p>
-                      </div>
-
-                      <p className="text-red-500 font-bold">
-                        Product unavailable
-                      </p>
-                    </>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
+      <h1 className="mt-4 font-['Oswald'] text-5xl md:text-6xl font-bold italic uppercase tracking-tight text-[#F5F1E8]">
+        My Orders
+      </h1>
     </div>
-  );
+
+    <div className="space-y-8">
+      {activeOrders.map((order) => (
+        <div
+          key={order._id}
+          className="rounded-lg border border-[#2C2418] bg-[#15120F] p-8 shadow-[0_20px_50px_rgba(0,0,0,0.45)] transition-all duration-300 hover:border-[#8C7437]"
+        >
+          {/* Header */}
+          <div className="flex flex-wrap items-center justify-between gap-6 mb-8">
+
+            <div>
+              <p className="font-['Oswald'] text-xs uppercase tracking-[2px] text-[#8C7437]">
+                Order ID
+              </p>
+              <p className="font-semibold text-[#F5F1E8]">
+                #{order._id.slice(-8).toUpperCase()}
+              </p>
+            </div>
+
+            <div>
+              <p className="font-['Oswald'] text-xs uppercase tracking-[2px] text-[#8C7437]">
+                Date
+              </p>
+              <p className="font-semibold text-[#F5F1E8]">
+                {new Date(order.createdAt).toLocaleDateString()}
+              </p>
+            </div>
+
+            <div>
+              <p className="font-['Oswald'] text-xs uppercase tracking-[2px] text-[#8C7437]">
+                Total
+              </p>
+              <p className="text-2xl font-bold text-[#EEBA02]">
+                ₹{order.totalAmount}
+              </p>
+            </div>
+
+            <span
+              className={`px-5 py-2 rounded-lg font-semibold uppercase tracking-wide
+                ${
+                  order.status === "Pending"
+                    ? "bg-[#8C7437] text-black"
+                    : ""
+                }
+                ${
+                  order.status === "Shipped"
+                    ? "bg-[#EEBA02] text-black"
+                    : ""
+                }
+                ${
+                  order.status === "Delivered"
+                    ? "bg-green-700 text-white"
+                    : ""
+                }
+                ${
+                  order.status === "Cancelled"
+                    ? "bg-red-700 text-white"
+                    : ""
+                }
+              `}
+            >
+              {order.status}
+            </span>
+
+            {order.status === "Pending" && (
+              <button
+                onClick={() => cancelOrder(order._id)}
+                className="rounded-lg border border-red-700 px-6 py-2 font-semibold uppercase tracking-wide text-red-400 transition-all duration-300 hover:bg-red-700 hover:text-white"
+              >
+                Cancel
+              </button>
+            )}
+          </div>
+
+          {/* Products */}
+          <div className="space-y-5 border-t border-[#2C2418] pt-8">
+            {order.products.map((item, index) => (
+              <div
+                key={index}
+                className="flex items-center gap-6 rounded-lg border border-[#2C2418] bg-[#0D0B09] p-4 transition-all duration-300 hover:border-[#8C7437]"
+              >
+                {item.product ? (
+                  <>
+                    <img
+                      src={item.product.image}
+                      alt={item.product.name}
+                      className="h-24 w-24 rounded-lg border border-[#2C2418] object-cover"
+                    />
+
+                    <div className="flex-1">
+                      <h2 className="font-['Oswald'] text-2xl font-bold italic uppercase tracking-tight text-[#F5F1E8]">
+                        {item.product.name}
+                      </h2>
+
+                      <p className="mt-2 text-[#9C9589]">
+                        Quantity: {item.quantity}
+                      </p>
+                    </div>
+
+                    <p className="text-2xl font-bold text-[#EEBA02]">
+                      ₹{item.product.price * item.quantity}
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex h-24 w-24 items-center justify-center rounded-lg border border-[#2C2418] bg-[#15120F] text-3xl">
+                      ❌
+                    </div>
+
+                    <div className="flex-1">
+                      <h2 className="font-['Oswald'] text-2xl font-bold italic uppercase text-red-500">
+                        Product Deleted
+                      </h2>
+
+                      <p className="mt-2 text-[#9C9589]">
+                        Quantity: {item.quantity}
+                      </p>
+                    </div>
+
+                    <p className="font-semibold text-red-500">
+                      Product unavailable
+                    </p>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
 }
 
 export default Orders;

@@ -1,66 +1,129 @@
 function Footer() {
   return (
+  <footer className="bg-[#0D0B09] border-t border-[#2C2418] text-[#F5F1E8] px-8 md:px-20 py-16">
 
-    <footer className="bg-black text-white py-16 px-10">
+    <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
 
-      <div className="flex justify-between">
+      {/* Brand */}
+      <div>
 
-        {/* Brand */}
-        <div>
+        <h1
+          style={{ fontFamily: "Oswald, sans-serif" }}
+          className="text-4xl font-bold italic uppercase text-[#EEBA02]"
+        >
+          ⚡ BOLT FUEL
+        </h1>
 
-          <h1 className="text-4xl font-bold text-blue-500">
-            BOLT
-          </h1>
+        <p className="text-[#9C9589] mt-5 leading-7">
+          Elite supplements engineered for athletes who demand maximum
+          performance, recovery and strength.
+        </p>
 
-          <p className="text-gray-400 mt-4 max-w-sm">
-            Premium fitness supplements engineered for strength, recovery, and peak performance.
-          </p>
+      </div>
 
-        </div>
+      {/* Shop */}
+      <div>
 
-        {/* Links */}
-        <div>
+        <h2 className="uppercase text-lg font-bold text-[#EEBA02] mb-5 tracking-wider">
+          Shop
+        </h2>
 
-          <h2 className="text-2xl font-bold mb-4">
-            Quick Links
-          </h2>
+        <ul className="space-y-3 text-[#B9B1A5]">
 
-          <ul className="space-y-3 text-gray-400">
+          <li className="hover:text-[#EEBA02] cursor-pointer transition">
+            All Products
+          </li>
 
-            <li>Home</li>
-            <li>Shop</li>
-            <li>Categories</li>
-            <li>About</li>
+          <li className="hover:text-[#EEBA02] cursor-pointer transition">
+            Best Sellers
+          </li>
 
-          </ul>
+          <li className="hover:text-[#EEBA02] cursor-pointer transition">
+            Protein
+          </li>
 
-        </div>
+          <li className="hover:text-[#EEBA02] cursor-pointer transition">
+            Creatine
+          </li>
 
-        {/* Contact */}
-        <div>
+        </ul>
 
-          <h2 className="text-2xl font-bold mb-4">
+      </div>
+
+      {/* Company */}
+      <div>
+
+        <h2 className="uppercase text-lg font-bold text-[#EEBA02] mb-5 tracking-wider">
+          Company
+        </h2>
+
+        <ul className="space-y-3 text-[#B9B1A5]">
+
+          <li className="hover:text-[#EEBA02] cursor-pointer transition">
+            About Us
+          </li>
+
+          <li className="hover:text-[#EEBA02] cursor-pointer transition">
             Contact
-          </h2>
+          </li>
 
-          <p className="text-gray-400">
-            support@voltra.com
+          <li className="hover:text-[#EEBA02] cursor-pointer transition">
+            Shipping Policy
+          </li>
+
+          <li className="hover:text-[#EEBA02] cursor-pointer transition">
+            Privacy Policy
+          </li>
+
+        </ul>
+
+      </div>
+
+      {/* Contact */}
+      <div>
+
+        <h2 className="uppercase text-lg font-bold text-[#EEBA02] mb-5 tracking-wider">
+          Contact
+        </h2>
+
+        <p className="text-[#B9B1A5]">
+          support@boltfuel.com
+        </p>
+
+        <p className="text-[#B9B1A5] mt-3">
+          +91 99999 99999
+        </p>
+
+        <div className="mt-6 border border-[#8C7437] rounded-lg p-4">
+
+          <p className="text-[#EEBA02] font-semibold">
+            ✔ Secure Checkout
           </p>
 
-          <p className="text-gray-400 mt-2">
-            +91 99999 99999
+          <p className="text-[#9C9589] text-sm mt-2">
+            100% Safe Payments
           </p>
 
         </div>
 
       </div>
 
-      <div className="border-t border-gray-800 mt-12 pt-6 text-center text-gray-500">
-        © 2026 BOLT. All rights reserved.
-      </div>
+    </div>
 
-    </footer>
-  )
+    <div className="border-t border-[#2C2418] mt-14 pt-6 flex flex-col md:flex-row justify-between items-center text-[#7E7668]">
+
+      <p>
+        © 2026 BOLT FUEL. ALL RIGHTS RESERVED.
+      </p>
+
+      <p className="uppercase tracking-widest mt-4 md:mt-0">
+        ENGINEER YOUR LIMIT
+      </p>
+
+    </div>
+
+  </footer>
+);
 }
 
 export default Footer

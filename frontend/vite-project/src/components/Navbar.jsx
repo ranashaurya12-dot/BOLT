@@ -16,7 +16,7 @@ function Navbar() {
   const logoutHandler = async () => {
     try {
       await axios.post(
-         "https://bolt-cfp7.onrender.com/api/auth/logout",
+        "https://bolt-cfp7.onrender.com/api/auth/logout",
         {},
         { withCredentials: true }
       );
@@ -30,41 +30,60 @@ function Navbar() {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="bg-gray-950 text-white px-8 md:px-16 py-5 sticky top-0 z-50 border-b border-gray-800/50 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
+    <nav className="bg-[#0D0B09] border-b border-[#2C2418] text-[#F5F1E8] sticky top-0 z-50 backdrop-blur-md">
+      <div className="max-w-7xl mx-auto flex justify-between items-center px-8 lg:px-14 py-5">
 
         {/* Logo */}
         <Link to="/">
-          <h1 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">
-          BOLT
+          <h1 className="text-3xl font-black tracking-widest uppercase text-[#EEBA02] hover:text-[#FFD35C] transition duration-300">
+            ⚡ BOLT FUEL
           </h1>
         </Link>
 
         {/* Navigation */}
-        <ul className="hidden md:flex gap-8 text-base items-center">
+        <ul className="hidden md:flex items-center gap-10 text-sm uppercase tracking-wider font-semibold">
+
           <Link to="/">
-            <li className={`transition font-medium ${isActive("/") ? "text-blue-500" : "text-gray-300 hover:text-white"}`}>
+            <li
+              className={`transition duration-300 ${
+                isActive("/")
+                  ? "text-[#EEBA02]"
+                  : "text-[#F5F1E8] hover:text-[#EEBA02]"
+              }`}
+            >
               Home
             </li>
           </Link>
 
           <Link to="/shop">
-            <li className={`transition font-medium ${isActive("/shop") ? "text-blue-500" : "text-gray-300 hover:text-white"}`}>
+            <li
+              className={`transition duration-300 ${
+                isActive("/shop")
+                  ? "text-[#EEBA02]"
+                  : "text-[#F5F1E8] hover:text-[#EEBA02]"
+              }`}
+            >
               Shop
             </li>
           </Link>
 
-          <li className="text-gray-300 hover:text-white cursor-pointer transition font-medium">
+          <li className="cursor-pointer text-[#F5F1E8] hover:text-[#EEBA02] transition">
             Categories
           </li>
 
-          <li className="text-gray-300 hover:text-white cursor-pointer transition font-medium">
+          <li className="cursor-pointer text-[#F5F1E8] hover:text-[#EEBA02] transition">
             About
           </li>
 
           {user && (
             <Link to="/orders">
-              <li className={`transition font-medium ${isActive("/orders") ? "text-blue-500" : "text-gray-300 hover:text-white"}`}>
+              <li
+                className={`transition duration-300 ${
+                  isActive("/orders")
+                    ? "text-[#EEBA02]"
+                    : "text-[#F5F1E8] hover:text-[#EEBA02]"
+                }`}
+              >
                 Orders
               </li>
             </Link>
@@ -72,8 +91,8 @@ function Navbar() {
 
           {user?.isAdmin && (
             <Link to="/admin">
-              <li className="bg-yellow-500 text-black px-4 py-2 rounded-lg font-bold hover:bg-yellow-400 transition text-sm">
-                Admin Panel
+              <li className="bg-[#EEBA02] text-black px-5 py-2 rounded-md font-bold hover:bg-[#FFD35C] transition">
+                Admin
               </li>
             </Link>
           )}
@@ -84,42 +103,45 @@ function Navbar() {
 
           {user && (
             <Link to="/cart">
-              <div className="relative">
-                <FiShoppingCart className="text-2xl text-gray-300 hover:text-blue-500 transition" />
-              </div>
+              <FiShoppingCart className="text-2xl text-[#F5F1E8] hover:text-[#EEBA02] transition duration-300" />
             </Link>
           )}
 
           {user ? (
             <div className="flex items-center gap-4">
-              <div className="hidden md:flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-sm">
+
+              <div className="hidden md:flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#EEBA02] flex items-center justify-center text-black font-bold">
                   {user.name?.charAt(0).toUpperCase()}
                 </div>
-                <span className="text-gray-300 text-sm">
+
+                <span className="text-[#F5F1E8] font-medium">
                   {user.name}
                 </span>
               </div>
 
               <button
                 onClick={logoutHandler}
-                className="bg-red-500/20 text-red-400 border border-red-500/30 px-5 py-2 rounded-full hover:bg-red-500 hover:text-white transition text-sm font-semibold"
+                className="border border-[#EEBA02] text-[#EEBA02] px-5 py-2 rounded-md hover:bg-[#EEBA02] hover:text-black transition duration-300 font-semibold"
               >
                 Logout
               </button>
             </div>
           ) : (
             <div className="flex items-center gap-3">
+
               <Link to="/login">
-                <button className="text-gray-300 hover:text-white transition text-sm font-medium">
+                <button className="text-[#F5F1E8] hover:text-[#EEBA02] transition font-medium">
                   Login
                 </button>
               </Link>
+
               <Link to="/register">
-                <button className="bg-blue-600 hover:bg-blue-500 px-5 py-2 rounded-full transition text-sm font-bold shadow-lg shadow-blue-500/20">
+                <button className="bg-[#EEBA02] text-black px-6 py-2 rounded-md font-bold hover:bg-[#FFD35C] transition duration-300">
                   Get Started
                 </button>
               </Link>
+
             </div>
           )}
         </div>

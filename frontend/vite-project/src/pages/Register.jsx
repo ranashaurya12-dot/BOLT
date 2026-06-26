@@ -54,55 +54,72 @@ const {setUser}=useContext(AuthContext);
     }
 
   };
+return (
 
-  return (
+  <div className="min-h-screen bg-[#0D0B09] flex items-center justify-center px-4 relative overflow-hidden">
 
-    <div className="bg-gray-100 min-h-screen flex items-center justify-center">
+    {/* Background Glow */}
+    <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[420px] h-[420px] rounded-full bg-[#EEBA02]/10 blur-3xl pointer-events-none" />
 
-      <form
-        onSubmit={submitHandler}
-        className="bg-white p-10 rounded-3xl shadow-lg w-[450px]"
-      >
+    <form
+      onSubmit={submitHandler}
+      className="relative z-10 w-full max-w-md rounded-lg border border-[#2C2418] bg-[#15120F] p-10 shadow-[0_20px_60px_rgba(0,0,0,0.55)]"
+    >
 
-        <h1 className="text-4xl font-bold mb-8 text-center">
+      <div className="text-center mb-8">
+        <h1 className="font-['Oswald'] text-5xl font-bold italic uppercase tracking-tight text-[#F5F1E8]">
           Create Account
         </h1>
 
-        <input
-          type="text"
-          placeholder="Full Name"
-          value={name}
-          onChange={(e)=>setName(e.target.value)}
-          className="w-full border p-4 rounded-xl mb-5 outline-none"
-        />
+        <div className="w-20 h-[2px] bg-[#8C7437] mx-auto mt-4"></div>
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e)=>setEmail(e.target.value)}
-          className="w-full border p-4 rounded-xl mb-5 outline-none"
-        />
+        <p className="mt-4 text-[#9C9589]">
+          Join the premium fitness community.
+        </p>
+      </div>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e)=>setPassword(e.target.value)}
-          className="w-full border p-4 rounded-xl mb-5 outline-none"
-        />
+      <input
+        type="text"
+        placeholder="Full Name"
+        value={name}
+        onChange={(e)=>setName(e.target.value)}
+        className="w-full rounded-lg border border-[#2C2418] bg-[#0D0B09] p-4 mb-5 text-[#F5F1E8] placeholder-[#6F685C] outline-none transition-all duration-300 focus:border-[#EEBA02]"
+      />
 
-        <button
-          className="bg-blue-500 text-white w-full py-4 rounded-xl text-xl hover:bg-blue-600 transition"
-        >
-          Register
-        </button>
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e)=>setEmail(e.target.value)}
+        className="w-full rounded-lg border border-[#2C2418] bg-[#0D0B09] p-4 mb-5 text-[#F5F1E8] placeholder-[#6F685C] outline-none transition-all duration-300 focus:border-[#EEBA02]"
+      />
 
-      </form>
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e)=>setPassword(e.target.value)}
+        className="w-full rounded-lg border border-[#2C2418] bg-[#0D0B09] p-4 mb-8 text-[#F5F1E8] placeholder-[#6F685C] outline-none transition-all duration-300 focus:border-[#EEBA02]"
+      />
 
-    </div>
+      <button
+        className="w-full rounded-lg bg-[#EEBA02] py-4 text-lg font-bold uppercase tracking-wide text-black transition-all duration-300 hover:scale-[1.02] hover:bg-[#FFD35C]"
+      >
+        Register
+      </button>
 
-  );
+      <p className="mt-6 text-center text-[#9C9589]">
+        Already have an account?{" "}
+        <span className="font-semibold text-[#EEBA02]">
+          Login
+        </span>
+      </p>
+
+    </form>
+
+  </div>
+
+);
 }
 
 export default Register;

@@ -50,75 +50,84 @@ function ProductDetails() {
     return <h1 className="text-4xl p-20">Loading...</h1>
   }
 
-  return (
-    <div className="bg-gray-100 min-h-screen px-10 py-20">
-      <div className="grid grid-cols-2 gap-16 bg-white p-10 rounded-3xl shadow-lg">
+ return (
+  <div className="min-h-screen bg-[#0D0B09] px-6 py-14 md:px-10 lg:px-16">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 rounded-lg border border-[#2C2418] bg-[#15120F] p-8 lg:p-10 shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
 
-        {/* Product Image */}
-        <div>
-          <img
-            src={product.image}
-            alt={product.name}
-            className="rounded-3xl w-full h-[550px] object-cover"
-          />
-        </div>
+      {/* Product Image */}
+      <div className="overflow-hidden rounded-lg border border-[#2C2418]">
+        <img
+          src={product.image}
+          alt={product.name}
+          className="h-[550px] w-full object-cover transition-transform duration-500 hover:scale-105"
+        />
+      </div>
 
-        {/* Product Info */}
-        <div>
+      {/* Product Info */}
+      <div className="flex flex-col justify-center">
 
-          <p className="text-blue-500 text-lg font-semibold">
-            {product.category}
+        <p className="font-['Oswald'] text-sm uppercase italic tracking-[4px] text-[#8C7437]">
+          {product.category}
+        </p>
+
+        <h1 className="mt-4 font-['Oswald'] text-5xl lg:text-6xl font-bold italic uppercase tracking-tight leading-tight text-[#F5F1E8]">
+          {product.name}
+        </h1>
+
+        <div className="mt-8 flex items-center gap-5">
+          <p className="text-5xl font-bold text-[#EEBA02]">
+            ₹{product.price}
           </p>
 
-          <h1 className="text-5xl font-bold mt-4 leading-tight">
-            {product.name}
-          </h1>
-
-          <div className="flex gap-4 items-center mt-6">
-            <p className="text-4xl text-blue-500 font-bold">
-              ₹{product.price}
+          {product.discountPrice > 0 && (
+            <p className="text-2xl line-through text-[#9C9589]">
+              ₹{product.discountPrice}
             </p>
-            {product.discountPrice > 0 && (
-              <p className="line-through text-gray-400 text-2xl">
-                ₹{product.discountPrice}
-              </p>
-            )}
-          </div>
+          )}
+        </div>
 
-          <p className="text-gray-600 text-lg mt-8 leading-8">
-            {product.description}
-          </p>
+        <p className="mt-8 text-lg leading-8 text-[#9C9589]">
+          {product.description}
+        </p>
 
-          <p className={`mt-4 font-semibold ${product.stock > 0 ? "text-green-500" : "text-red-500"}`}>
-            {product.stock > 0 ? `In Stock (${product.stock} left)` : "Out of Stock"}
-          </p>
+        <p
+          className={`mt-6 font-semibold uppercase tracking-wide ${
+            product.stock > 0 ? "text-[#EEBA02]" : "text-red-500"
+          }`}
+        >
+          {product.stock > 0
+            ? `In Stock (${product.stock} left)`
+            : "Out of Stock"}
+        </p>
 
-          {/* Buttons */}
-          <div className="flex gap-6 mt-12">
-            <button
-              onClick={handleAddToCart}
-              disabled={loading || product.stock === 0}
-              className="bg-black text-white px-10 py-4 rounded-xl hover:bg-blue-500 transition disabled:opacity-50"
-            >
-              {loading ? "Adding..." : "Add To Cart"}
-            </button>
+        {/* Buttons */}
+        <div className="mt-12 flex flex-col sm:flex-row gap-5">
 
-            <button
-              onClick={() => {
-                handleAddToCart()
-                navigate("/cart")
-              }}
-              disabled={loading || product.stock === 0}
-              className="border border-black px-10 py-4 rounded-xl hover:bg-black hover:text-white transition disabled:opacity-50"
-            >
-              Buy Now
-            </button>
-          </div>
+          <button
+            onClick={handleAddToCart}
+            disabled={loading || product.stock === 0}
+            className="rounded-lg bg-[#EEBA02] px-10 py-4 font-bold uppercase tracking-wide text-black transition-all duration-300 hover:scale-[1.02] hover:bg-[#FFD35C] disabled:opacity-50"
+          >
+            {loading ? "Adding..." : "Add To Cart"}
+          </button>
+
+          <button
+            onClick={() => {
+              handleAddToCart();
+              navigate("/cart");
+            }}
+            disabled={loading || product.stock === 0}
+            className="rounded-lg border border-[#8C7437] px-10 py-4 font-bold uppercase tracking-wide text-[#F5F1E8] transition-all duration-300 hover:border-[#EEBA02] hover:bg-[#EEBA02] hover:text-black disabled:opacity-50"
+          >
+            Buy Now
+          </button>
 
         </div>
+
       </div>
     </div>
-  )
+  </div>
+)
 }
 
 export default ProductDetails

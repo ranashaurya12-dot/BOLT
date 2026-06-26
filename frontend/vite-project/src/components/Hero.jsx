@@ -3,94 +3,125 @@ import { useNavigate } from "react-router-dom"
 function Hero() {
   const navigate = useNavigate()
 
-  return (
-    <section className="bg-gray-950 text-white min-h-screen flex items-center px-8 md:px-20 relative overflow-hidden">
+ return (
+  <section className="bg-[#0D0B09] text-[#F5F1E8] min-h-screen flex items-center px-8 md:px-20 relative overflow-hidden">
 
-      {/* Background glow effects */}
-      <div className="absolute top-20 left-20 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
+    {/* Background Glow */}
+    <div className="absolute -top-20 -left-20 w-[450px] h-[450px] bg-[#EEBA02]/10 rounded-full blur-[140px]" />
+    <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#8C7437]/10 rounded-full blur-[120px]" />
 
-      {/* Left content */}
-      <div className="flex-1 z-10">
+    {/* Left */}
+    <div className="flex-1 z-10">
 
-        <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 px-4 py-2 rounded-full mb-6">
-          <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
-          <p className="text-blue-400 text-sm font-semibold uppercase tracking-widest">
-            Premium Fitness Supplements
+      <div className="inline-flex items-center gap-2 border border-[#8C7437] bg-[#1A1713] px-5 py-2 rounded-full mb-8">
+        <div className="w-2 h-2 bg-[#EEBA02] rounded-full animate-pulse"></div>
+
+        <p className="uppercase tracking-[4px] text-[#EEBA02] text-xs font-semibold">
+          Premium Nutrition
+        </p>
+      </div>
+<h1
+  style={{
+    fontFamily: "'Bebas Neue', 'Oswald', sans-serif",
+    fontStyle: "italic",
+    fontWeight: 700,
+    lineHeight: "0.88",
+    letterSpacing: "-1px",
+  }}
+  className="text-7xl md:text-[8.5rem] uppercase antialiased"
+>
+  <span className="text-[#F5F1E8] block">ENGINEER</span>
+  <span className="text-[#F5F1E8] block">YOUR</span>
+  <span className="text-[#EEBA02] block">LIMIT</span>
+</h1>
+      <p className="text-[#B9B1A5] text-lg md:text-xl mt-8 max-w-xl leading-8">
+        Premium whey protein, creatine and performance supplements built for
+        athletes who demand strength, endurance and recovery.
+      </p>
+
+      <div className="flex gap-5 mt-10 flex-wrap">
+
+        <button
+          onClick={() => navigate("/shop")}
+          className="bg-[#EEBA02] text-black px-10 py-4 rounded-md font-bold hover:bg-[#FFD35C] transition duration-300"
+        >
+          SHOP NOW
+        </button>
+
+        <button
+          onClick={() => navigate("/shop")}
+          className="border border-[#8C7437] px-10 py-4 rounded-md hover:border-[#EEBA02] hover:text-[#EEBA02] transition duration-300"
+        >
+          EXPLORE →
+        </button>
+
+      </div>
+
+      {/* Stats */}
+
+      <div className="flex gap-12 mt-20 flex-wrap">
+
+        <div>
+          <h2 className="text-5xl font-black text-[#EEBA02]">
+            10K+
+          </h2>
+          <p className="text-[#9C9589] mt-2 uppercase text-sm">
+            Happy Customers
           </p>
         </div>
 
-        <h1 className="text-7xl md:text-8xl font-black leading-tight max-w-2xl">
-          Fuel Your{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">
-            Strength
-          </span>
-        </h1>
-
-        <p className="text-gray-400 text-xl mt-6 max-w-xl leading-8">
-          High-quality whey protein, creatine, and performance supplements engineered for serious athletes.
-        </p>
-
-        <div className="mt-10 flex flex-wrap gap-4">
-          <button
-            onClick={() => navigate("/shop")}
-            className="bg-blue-600 hover:bg-blue-500 px-10 py-4 rounded-xl text-lg font-bold transition hover:scale-105 shadow-lg shadow-blue-500/20"
-          >
-            Shop Now
-          </button>
-
-          <button
-            onClick={() => navigate("/shop")}
-            className="border border-gray-700 px-10 py-4 rounded-xl text-lg hover:border-blue-500 hover:text-blue-500 transition"
-          >
-            Explore Products →
-          </button>
+        <div>
+          <h2 className="text-5xl font-black text-[#EEBA02]">
+            50+
+          </h2>
+          <p className="text-[#9C9589] mt-2 uppercase text-sm">
+            Products
+          </p>
         </div>
 
-        {/* Stats */}
-        <div className="flex gap-12 mt-16">
-          <div className="border-l-2 border-blue-500 pl-4">
-            <h2 className="text-4xl font-black text-white">10k+</h2>
-            <p className="text-gray-400 mt-1">Happy Customers</p>
-          </div>
-          <div className="border-l-2 border-blue-500 pl-4">
-            <h2 className="text-4xl font-black text-white">50+</h2>
-            <p className="text-gray-400 mt-1">Products</p>
-          </div>
-          <div className="border-l-2 border-blue-500 pl-4">
-            <h2 className="text-4xl font-black text-white">100%</h2>
-            <p className="text-gray-400 mt-1">Pure Quality</p>
-          </div>
+        <div>
+          <h2 className="text-5xl font-black text-[#EEBA02]">
+            100%
+          </h2>
+          <p className="text-[#9C9589] mt-2 uppercase text-sm">
+            Lab Tested
+          </p>
         </div>
 
       </div>
 
-      {/* Right side image */}
-      <div className="flex-1 justify-center hidden md:flex z-10">
-        <div className="relative">
-          {/* Glow behind image */}
-          <div className="absolute inset-0 bg-blue-500/20 rounded-3xl blur-2xl" />
-          <img
-            src="https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=600"
-            className="w-[480px] h-[580px] object-cover rounded-3xl relative z-10 border border-gray-800"
-          />
+    </div>
 
-          {/* Floating badge */}
-          <div className="absolute -bottom-6 -left-6 bg-gray-900 border border-gray-800 rounded-2xl p-4 z-20 shadow-2xl">
-            <p className="text-gray-400 text-sm">Trusted by</p>
-            <p className="text-white font-black text-2xl">10,000+ Athletes</p>
-          </div>
+    {/* Right */}
 
-          {/* Floating badge 2 */}
-          <div className="absolute -top-6 -right-6 bg-blue-600 rounded-2xl p-4 z-20 shadow-2xl">
-            <p className="text-white font-black text-xl">100%</p>
-            <p className="text-blue-200 text-sm">Pure Quality</p>
-          </div>
+    <div className="hidden md:flex flex-1 justify-center z-10">
+
+      <div className="relative">
+
+        <div className="absolute inset-0 bg-[#EEBA02]/20 blur-3xl rounded-full"></div>
+
+        <img
+          src="https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=800"
+          alt="Supplement"
+          className="relative w-[520px] h-[650px] object-cover rounded-2xl border border-[#2C2418]"
+        />
+
+        <div className="absolute bottom-6 left-6 bg-[#1A1713]/95 border border-[#8C7437] px-6 py-4 rounded-xl backdrop-blur-lg">
+          <p className="text-[#9C9589] text-sm uppercase">
+            Trusted By
+          </p>
+
+          <h3 className="text-2xl font-bold text-[#EEBA02]">
+            10,000+ Athletes
+          </h3>
         </div>
+
       </div>
 
-    </section>
-  )
+    </div>
+
+  </section>
+);
 }
 
 export default Hero
