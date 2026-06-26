@@ -1,8 +1,8 @@
 import Navbar from "../components/Navbar"
 import Hero from "../components/Hero"
-import FeaturedProducts from "../components/featureproducts"
 import Categories from "../components/Categories"
-import Footer from "../components/footer"
+import FeaturedProducts from "../components/FeaturedProducts"
+import Footer from "../components/Footer"
 function Home() {
   return (
     <>
