@@ -61,11 +61,11 @@ function ProductCard({ product }) {
     {/* Image */}
     <div className="relative h-60 bg-[#0F0D0B] flex items-center justify-center border-b border-[#2C2418]">
 
-      <img
-        src={product.image}
-        alt={product.name}
-        className="h-44 object-contain group-hover:scale-105 transition duration-300"
-      />
+     <img
+  src={product.images?.[0] || "https://via.placeholder.com/300x300?text=No+Image"}
+  alt={product.name}
+  className="h-44 object-contain group-hover:scale-105 transition duration-300"
+/>
 
       <div className="absolute top-3 left-3 text-[10px] uppercase px-2 py-1 border border-[#8C7437] text-[#EEBA02] tracking-wider">
         {product.category}
