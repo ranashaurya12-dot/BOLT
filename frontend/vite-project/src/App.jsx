@@ -16,6 +16,7 @@ import AdminOrders from "./pages/admin/AdminOrders"
 import AdminUsers from "./pages/admin/AdminUsers"
 import AddProduct from "./pages/admin/AddProduct";
 import EditProduct from "./pages/admin/EditProduct";
+import About from "./components/about"
 // ✅ Protected Route
 function ProtectedRoute({ children }) {
   const { user, loading } = useContext(AuthContext)
@@ -39,6 +40,7 @@ function App() {
       <Toaster position="top-right" />
       <Navbar />
       <Routes>
+        <Route path="/about" element={<About />} />
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/product/:id" element={<ProductDetails />} />

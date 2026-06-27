@@ -87,13 +87,13 @@ function ProductDetails() {
                 src={product.video}
                 controls
                 playsInline
-                className="h-[550px] w-full object-cover"
+                className="h-[550px] w-full object-contain bg-[#0D0B09]"
               />
             ) : (
               <img
                 src={product.images?.[selectedMedia.index]}
                 alt={product.name}
-                className="h-[550px] w-full object-cover transition-transform duration-500 hover:scale-105"
+                className="h-[550px] w-full object-contain bg-[#0D0B09] transition-transform duration-500 hover:scale-105"
               />
             )}
           </div>
@@ -111,7 +111,7 @@ function ProductDetails() {
                   onClick={() =>
                     setSelectedMedia({ type: "image", index })
                   }
-                  className={`w-20 h-20 rounded-lg cursor-pointer object-cover border-2 flex-shrink-0 transition-all duration-200 ${
+                  className={`w-20 h-20 rounded-lg cursor-pointer object-contain bg-[#15120F] border-2 flex-shrink-0 transition-all duration-200 ${
                     selectedMedia.type === "image" &&
                     selectedMedia.index === index
                       ? "border-[#EEBA02]"

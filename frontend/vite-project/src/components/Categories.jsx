@@ -11,7 +11,7 @@ function Categories() {
       color: "from-blue-600 to-blue-800",
     },
     {
-      name: "Creatine",
+      name: "EAA",
       icon: "⚡",
       desc: "Boost strength & power",
       color: "from-yellow-600 to-orange-700",

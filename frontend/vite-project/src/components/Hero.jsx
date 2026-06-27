@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-
+import pagecover from "../assets/pagecover.jpeg"
 function Hero() {
   const navigate = useNavigate()
 
@@ -101,7 +101,7 @@ function Hero() {
         <div className="absolute inset-0 bg-[#EEBA02]/20 blur-3xl rounded-full"></div>
 
         <img
-          src="https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=800"
+          src={pagecover}
           alt="Supplement"
           className="relative w-[520px] h-[650px] object-cover rounded-2xl border border-[#2C2418]"
         />

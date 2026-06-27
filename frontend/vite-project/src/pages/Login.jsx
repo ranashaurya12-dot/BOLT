@@ -45,7 +45,7 @@ function Login() {
       {/* Logo */}
       <div className="text-center mb-10">
         <h1 className="font-['Oswald'] text-5xl font-bold italic uppercase tracking-tight text-[#EEBA02]">
-          VOLTRA
+        BOLT FUEL
         </h1>
         <div className="w-20 h-[2px] bg-[#8C7437] mx-auto mt-4"></div>
         <p className="text-[#9C9589] mt-4 text-base">

@@ -1,11 +1,13 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import toast from "react-hot-toast";
 import { FiShoppingCart } from "react-icons/fi";
 import logo from "../assets/boltfuel.jpeg";
+import { Navigate } from "react-router-dom";
 function Navbar() {
+  const navigate=useNavigate();
   const { user, setUser } = useContext(AuthContext);
   const location = useLocation();
 
@@ -76,7 +78,7 @@ function Navbar() {
         Categories
       </li>
 
-      <li className="cursor-pointer text-white hover:text-[#EEBA02] transition">
+      <li className="cursor-pointer text-white hover:text-[#EEBA02] transition" onClick={()=>navigate("/about")}>
         About
       </li>
 
