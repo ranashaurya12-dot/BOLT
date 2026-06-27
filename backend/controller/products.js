@@ -3,8 +3,6 @@ import mongoose from "mongoose";
 
 const isValidId = (id) => mongoose.Types.ObjectId.isValid(id);
 
-
-
 export const addProduct = async (req, res) => {
   try {
     const {
@@ -13,12 +11,19 @@ export const addProduct = async (req, res) => {
       price,
       discountPrice,
       category,
-      image,
-      video, // ✅ Added
+      images,
+      video,
       stock,
     } = req.body;
 
-    if (!name || !description || !price || !category || !image) {
+    if (
+      !name ||
+      !description ||
+      !price ||
+      !category ||
+      !images ||
+      images.length === 0
+    ) {
       return res.status(400).json({
         success: false,
         message: "All required fields must be provided",
@@ -40,8 +45,8 @@ export const addProduct = async (req, res) => {
       price,
       discountPrice,
       category,
-      image,
-      video, // ✅ Save video
+      images,
+      video,
       stock,
     });
 

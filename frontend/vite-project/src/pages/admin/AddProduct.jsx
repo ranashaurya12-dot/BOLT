@@ -13,7 +13,7 @@ const [formData, setFormData] = useState({
   price: "",
   discountPrice: "",
   stock: "",
-  image: "",
+  images:[""],
   video: "",
 });
 
@@ -43,7 +43,7 @@ const [formData, setFormData] = useState({
   price: "",
   discountPrice: "",
   stock: "",
-  image: "",
+  images:[""],
   video: "",
 });
       } else {
@@ -188,20 +188,43 @@ const [formData, setFormData] = useState({
             </div>
 
             {/* Image URL */}
-            <div>
-              <label className="block mb-2 text-gray-400 font-medium">
-                Image URL
-              </label>
-              <input
-                type="text"
-                name="image"
-                value={formData.image}
-                onChange={handleChange}
-                required
-                placeholder="https://..."
-                className="w-full bg-gray-800 border border-gray-700 text-white rounded-xl p-3 outline-none focus:border-blue-500 transition"
-              />
-            </div>
+          <div>
+  <label className="block mb-2 text-gray-400 font-medium">
+    Image URLs
+  </label>
+
+  {formData.images.map((img, index) => (
+    <input
+      key={index}
+      type="text"
+      value={img}
+      placeholder={`Image URL ${index + 1}`}
+      onChange={(e) => {
+        const newImages = [...formData.images];
+        newImages[index] = e.target.value;
+
+        setFormData({
+          ...formData,
+          images: newImages,
+        });
+      }}
+      className="w-full bg-gray-800 border border-gray-700 text-white rounded-xl p-3 mb-3"
+    />
+  ))}
+
+  <button
+    type="button"
+    onClick={() =>
+      setFormData({
+        ...formData,
+        images: [...formData.images, ""],
+      })
+    }
+    className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg"
+  >
+    + Add Image
+  </button>
+</div>
 {/* Video URL */}
 <div>
   <label className="block mb-2 text-gray-400 font-medium">
@@ -247,9 +270,9 @@ const [formData, setFormData] = useState({
       playsInline
       className="w-full h-full object-cover"
     />
-  ) : formData.image ? (
+    ) : formData.images[0] ? (
     <img
-      src={formData.image}
+      src={formData.images[0]}
       alt="preview"
       className="w-full h-full object-cover"
     />

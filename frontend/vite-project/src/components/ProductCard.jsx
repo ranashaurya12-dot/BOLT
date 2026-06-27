@@ -96,12 +96,12 @@ function ProductCard({ product }) {
       <div className="flex items-center gap-3 mt-5">
 
         <p className="text-2xl font-bold text-[#EEBA02]">
-          ₹{product.price}
+          ₹{product.discountPrice}
         </p>
 
         {product.discountPrice > 0 && (
           <p className="line-through text-[#7E7668]">
-            ₹{product.discountPrice}
+            ₹{product.price}
           </p>
         )}
 

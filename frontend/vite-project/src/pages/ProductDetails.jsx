@@ -4,8 +4,6 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { AuthContext } from "../context/AuthContext";
 
-import lCarnitineVideo from "../assets/L carnitine.mp4";
-
 function ProductDetails() {
   const { id } = useParams();
   const { user } = useContext(AuthContext);
@@ -13,6 +11,7 @@ function ProductDetails() {
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(0);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -75,25 +74,48 @@ function ProductDetails() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 rounded-lg border border-[#2C2418] bg-[#15120F] p-8 lg:p-10 shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
 
         {/* Product Media */}
-        <div className="overflow-hidden rounded-lg border border-[#2C2418]">
-          {product.name === "L-CARNITINE" ? (
-            <video
-              src={lCarnitineVideo}
-              autoPlay
-              muted
-              loop
-              controls
-              playsInline
-              className="h-[550px] w-full object-cover"
-            />
-          ) : (
-            <img
-              src={product.image}
-              alt={product.name}
-              className="h-[550px] w-full object-cover transition-transform duration-500 hover:scale-105"
-            />
-          )}
-        </div>
+    {/* Product Media */}
+<div>
+
+  <div className="overflow-hidden rounded-lg border border-[#2C2418]">
+    {product.video ? (
+      <video
+        src={product.video}
+        autoPlay
+        muted
+        loop
+        controls
+        playsInline
+        className="h-[550px] w-full object-cover"
+      />
+    ) : (
+      <img
+        src={product.images?.[selectedImage]}
+        alt={product.name}
+        className="h-[550px] w-full object-cover transition-transform duration-500 hover:scale-105"
+      />
+    )}
+  </div>
+
+  {product.images?.length > 1 && (
+    <div className="mt-4 flex gap-3 overflow-x-auto">
+      {product.images.map((img, index) => (
+        <img
+          key={index}
+          src={img}
+          alt={`Thumbnail ${index + 1}`}
+          onClick={() => setSelectedImage(index)}
+          className={`w-20 h-20 rounded-lg cursor-pointer object-cover border-2 ${
+            selectedImage === index
+              ? "border-[#EEBA02]"
+              : "border-[#2C2418]"
+          }`}
+        />
+      ))}
+    </div>
+  )}
+
+</div>
 
         {/* Product Info */}
         <div className="flex flex-col justify-center">
@@ -108,12 +130,12 @@ function ProductDetails() {
 
           <div className="mt-8 flex items-center gap-5">
             <p className="text-5xl font-bold text-[#EEBA02]">
-              ₹{product.price}
+              ₹{product.discountPrice}
             </p>
 
             {product.discountPrice > 0 && (
               <p className="text-2xl line-through text-[#9C9589]">
-                ₹{product.discountPrice}
+                ₹{product.price}
               </p>
             )}
           </div>

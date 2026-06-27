@@ -114,7 +114,7 @@ const deleteProduct = async (id) => {
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-4">
                       <img
-                        src={product.image}
+                      src={product.images?.[0]}
                         alt={product.name}
                         className="w-16 h-16 rounded-xl object-cover border border-gray-700"
                       />
