@@ -11,7 +11,10 @@ function ProductDetails() {
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(0);
+  const [selectedMedia, setSelectedMedia] = useState({
+    type: "image",
+    index: 0,
+  });
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -20,6 +23,7 @@ function ProductDetails() {
           `https://bolt-cfp7.onrender.com/api/product/single-product/${id}`
         );
         setProduct(response.data.product);
+        setSelectedMedia({ type: "image", index: 0 });
       } catch (error) {
         toast.error("Failed to load product");
       }
@@ -74,48 +78,68 @@ function ProductDetails() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 rounded-lg border border-[#2C2418] bg-[#15120F] p-8 lg:p-10 shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
 
         {/* Product Media */}
-    {/* Product Media */}
-<div>
+        <div>
 
-  <div className="overflow-hidden rounded-lg border border-[#2C2418]">
-    {product.video ? (
-      <video
-        src={product.video}
-        autoPlay
-        muted
-        loop
-        controls
-        playsInline
-        className="h-[550px] w-full object-cover"
-      />
-    ) : (
-      <img
-        src={product.images?.[selectedImage]}
-        alt={product.name}
-        className="h-[550px] w-full object-cover transition-transform duration-500 hover:scale-105"
-      />
-    )}
-  </div>
+          {/* Main Media Display */}
+          <div className="overflow-hidden rounded-lg border border-[#2C2418]">
+            {selectedMedia.type === "video" ? (
+              <video
+                src={product.video}
+                controls
+                playsInline
+                className="h-[550px] w-full object-cover"
+              />
+            ) : (
+              <img
+                src={product.images?.[selectedMedia.index]}
+                alt={product.name}
+                className="h-[550px] w-full object-cover transition-transform duration-500 hover:scale-105"
+              />
+            )}
+          </div>
 
-  {product.images?.length > 1 && (
-    <div className="mt-4 flex gap-3 overflow-x-auto">
-      {product.images.map((img, index) => (
-        <img
-          key={index}
-          src={img}
-          alt={`Thumbnail ${index + 1}`}
-          onClick={() => setSelectedImage(index)}
-          className={`w-20 h-20 rounded-lg cursor-pointer object-cover border-2 ${
-            selectedImage === index
-              ? "border-[#EEBA02]"
-              : "border-[#2C2418]"
-          }`}
-        />
-      ))}
-    </div>
-  )}
+          {/* Thumbnails */}
+          {(product.images?.length > 0 || product.video) && (
+            <div className="mt-4 flex gap-3 overflow-x-auto pb-2">
 
-</div>
+              {/* Image thumbnails */}
+              {product.images?.map((img, index) => (
+                <img
+                  key={index}
+                  src={img}
+                  alt={`Thumbnail ${index + 1}`}
+                  onClick={() =>
+                    setSelectedMedia({ type: "image", index })
+                  }
+                  className={`w-20 h-20 rounded-lg cursor-pointer object-cover border-2 flex-shrink-0 transition-all duration-200 ${
+                    selectedMedia.type === "image" &&
+                    selectedMedia.index === index
+                      ? "border-[#EEBA02]"
+                      : "border-[#2C2418] hover:border-[#8C7437]"
+                  }`}
+                />
+              ))}
+
+              {/* Video thumbnail */}
+              {product.video && (
+                <div
+                  onClick={() =>
+                    setSelectedMedia({ type: "video", index: 0 })
+                  }
+                  className={`w-20 h-20 rounded-lg cursor-pointer border-2 flex-shrink-0 flex items-center justify-center bg-[#1f1a14] transition-all duration-200 ${
+                    selectedMedia.type === "video"
+                      ? "border-[#EEBA02]"
+                      : "border-[#2C2418] hover:border-[#8C7437]"
+                  }`}
+                >
+                  <span className="text-3xl">▶</span>
+                </div>
+              )}
+
+            </div>
+          )}
+
+        </div>
 
         {/* Product Info */}
         <div className="flex flex-col justify-center">
