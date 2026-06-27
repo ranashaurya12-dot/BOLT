@@ -6,15 +6,16 @@ import { useNavigate } from "react-router-dom";
 const AddProduct = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    category: "",
-    price: "",
-    discountPrice: "",
-    stock: "",
-    image: "",
-  });
+const [formData, setFormData] = useState({
+  name: "",
+  description: "",
+  category: "",
+  price: "",
+  discountPrice: "",
+  stock: "",
+  image: "",
+  video: "",
+});
 
   const handleChange = (e) => {
     setFormData({
@@ -35,15 +36,16 @@ const AddProduct = () => {
 
       if (data.success) {
         toast.success("Product Added Successfully");
-        setFormData({
-          name: "",
-          description: "",
-          category: "",
-          price: "",
-          discountPrice: "",
-          stock: "",
-          image: "",
-        });
+      setFormData({
+  name: "",
+  description: "",
+  category: "",
+  price: "",
+  discountPrice: "",
+  stock: "",
+  image: "",
+  video: "",
+});
       } else {
         toast.error(data.message);
       }
@@ -200,7 +202,20 @@ const AddProduct = () => {
                 className="w-full bg-gray-800 border border-gray-700 text-white rounded-xl p-3 outline-none focus:border-blue-500 transition"
               />
             </div>
-
+{/* Video URL */}
+<div>
+  <label className="block mb-2 text-gray-400 font-medium">
+    Video URL
+  </label>
+  <input
+    type="text"
+    name="video"
+    value={formData.video}
+    onChange={handleChange}
+    placeholder="https://.../video.mp4"
+    className="w-full bg-gray-800 border border-gray-700 text-white rounded-xl p-3 outline-none focus:border-blue-500 transition"
+  />
+</div>
             <button
               type="submit"
               disabled={loading}
@@ -220,19 +235,30 @@ const AddProduct = () => {
             </h2>
 
             {/* Image preview */}
-            <div className="w-full h-56 bg-gray-800 rounded-2xl overflow-hidden mb-6">
-              {formData.image ? (
-                <img
-                  src={formData.image}
-                  alt="preview"
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center text-gray-600">
-                  No image yet
-                </div>
-              )}
-            </div>
+           {/* Image / Video Preview */}
+<div className="w-full h-56 bg-gray-800 rounded-2xl overflow-hidden mb-6">
+  {formData.video ? (
+    <video
+      src={formData.video}
+      autoPlay
+      muted
+      loop
+      controls
+      playsInline
+      className="w-full h-full object-cover"
+    />
+  ) : formData.image ? (
+    <img
+      src={formData.image}
+      alt="preview"
+      className="w-full h-full object-cover"
+    />
+  ) : (
+    <div className="w-full h-full flex items-center justify-center text-gray-600">
+      No Preview
+    </div>
+  )}
+</div>
 
             {/* Product preview */}
             <div className="space-y-3">

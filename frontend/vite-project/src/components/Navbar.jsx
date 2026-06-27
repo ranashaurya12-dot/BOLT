@@ -4,7 +4,7 @@ import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import toast from "react-hot-toast";
 import { FiShoppingCart } from "react-icons/fi";
-
+import logo from "../assets/boltfuel.jpeg";
 function Navbar() {
   const { user, setUser } = useContext(AuthContext);
   const location = useLocation();
@@ -30,125 +30,132 @@ function Navbar() {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="bg-[#0D0B09] border-b border-[#2C2418] text-[#F5F1E8] sticky top-0 z-50 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-8 lg:px-14 py-5">
+    <nav className="sticky top-0 z-50 bg-[#0D0B09]/95 backdrop-blur-md border-b border-[#2C2418] shadow-lg">
+  <div className="max-w-7xl mx-auto h-24 flex items-center justify-between px-6 lg:px-12">
 
-        {/* Logo */}
-        <Link to="/">
-          <h1 className="text-3xl font-black tracking-widest uppercase text-[#EEBA02] hover:text-[#FFD35C] transition duration-300">
-            ⚡ BOLT FUEL
-          </h1>
+    {/* Logo */}
+    <Link
+      to="/"
+      className="flex items-center flex-shrink-0"
+    >
+      <img
+        src={logo}
+        alt="Bolt Fuel"
+        className="h-20 lg:h-24 w-auto object-contain transition-all duration-300 hover:scale-105"
+      />
+    </Link>
+
+    {/* Navigation */}
+    <ul className="hidden md:flex items-center gap-10 text-sm uppercase tracking-wider font-semibold">
+
+      <Link to="/">
+        <li
+          className={`transition ${
+            isActive("/")
+              ? "text-[#EEBA02]"
+              : "text-white hover:text-[#EEBA02]"
+          }`}
+        >
+          Home
+        </li>
+      </Link>
+
+      <Link to="/shop">
+        <li
+          className={`transition ${
+            isActive("/shop")
+              ? "text-[#EEBA02]"
+              : "text-white hover:text-[#EEBA02]"
+          }`}
+        >
+          Shop
+        </li>
+      </Link>
+
+      <li className="cursor-pointer text-white hover:text-[#EEBA02] transition">
+        Categories
+      </li>
+
+      <li className="cursor-pointer text-white hover:text-[#EEBA02] transition">
+        About
+      </li>
+
+      {user && (
+        <Link to="/orders">
+          <li
+            className={`transition ${
+              isActive("/orders")
+                ? "text-[#EEBA02]"
+                : "text-white hover:text-[#EEBA02]"
+            }`}
+          >
+            Orders
+          </li>
         </Link>
+      )}
 
-        {/* Navigation */}
-        <ul className="hidden md:flex items-center gap-10 text-sm uppercase tracking-wider font-semibold">
-
-          <Link to="/">
-            <li
-              className={`transition duration-300 ${
-                isActive("/")
-                  ? "text-[#EEBA02]"
-                  : "text-[#F5F1E8] hover:text-[#EEBA02]"
-              }`}
-            >
-              Home
-            </li>
-          </Link>
-
-          <Link to="/shop">
-            <li
-              className={`transition duration-300 ${
-                isActive("/shop")
-                  ? "text-[#EEBA02]"
-                  : "text-[#F5F1E8] hover:text-[#EEBA02]"
-              }`}
-            >
-              Shop
-            </li>
-          </Link>
-
-          <li className="cursor-pointer text-[#F5F1E8] hover:text-[#EEBA02] transition">
-            Categories
+      {user?.isAdmin && (
+        <Link to="/admin">
+          <li className="bg-[#EEBA02] text-black px-5 py-2 rounded-lg font-bold hover:bg-yellow-400 transition">
+            Admin
           </li>
+        </Link>
+      )}
+    </ul>
 
-          <li className="cursor-pointer text-[#F5F1E8] hover:text-[#EEBA02] transition">
-            About
-          </li>
+    {/* Right Side */}
+    <div className="flex items-center gap-5">
 
-          {user && (
-            <Link to="/orders">
-              <li
-                className={`transition duration-300 ${
-                  isActive("/orders")
-                    ? "text-[#EEBA02]"
-                    : "text-[#F5F1E8] hover:text-[#EEBA02]"
-                }`}
-              >
-                Orders
-              </li>
-            </Link>
-          )}
+      {user && (
+        <Link to="/cart">
+          <FiShoppingCart className="text-2xl text-white hover:text-[#EEBA02] transition" />
+        </Link>
+      )}
 
-          {user?.isAdmin && (
-            <Link to="/admin">
-              <li className="bg-[#EEBA02] text-black px-5 py-2 rounded-md font-bold hover:bg-[#FFD35C] transition">
-                Admin
-              </li>
-            </Link>
-          )}
-        </ul>
+      {user ? (
+        <div className="flex items-center gap-4">
 
-        {/* Right Side */}
-        <div className="flex items-center gap-5">
-
-          {user && (
-            <Link to="/cart">
-              <FiShoppingCart className="text-2xl text-[#F5F1E8] hover:text-[#EEBA02] transition duration-300" />
-            </Link>
-          )}
-
-          {user ? (
-            <div className="flex items-center gap-4">
-
-              <div className="hidden md:flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#EEBA02] flex items-center justify-center text-black font-bold">
-                  {user.name?.charAt(0).toUpperCase()}
-                </div>
-
-                <span className="text-[#F5F1E8] font-medium">
-                  {user.name}
-                </span>
-              </div>
-
-              <button
-                onClick={logoutHandler}
-                className="border border-[#EEBA02] text-[#EEBA02] px-5 py-2 rounded-md hover:bg-[#EEBA02] hover:text-black transition duration-300 font-semibold"
-              >
-                Logout
-              </button>
+          <div className="hidden md:flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-[#EEBA02] flex items-center justify-center text-black font-bold">
+              {user.name?.charAt(0).toUpperCase()}
             </div>
-          ) : (
-            <div className="flex items-center gap-3">
 
-              <Link to="/login">
-                <button className="text-[#F5F1E8] hover:text-[#EEBA02] transition font-medium">
-                  Login
-                </button>
-              </Link>
+            <span className="text-white font-medium">
+              {user.name}
+            </span>
+          </div>
 
-              <Link to="/register">
-                <button className="bg-[#EEBA02] text-black px-6 py-2 rounded-md font-bold hover:bg-[#FFD35C] transition duration-300">
-                  Get Started
-                </button>
-              </Link>
+          <button
+            onClick={logoutHandler}
+            className="border border-[#EEBA02] text-[#EEBA02] px-5 py-2 rounded-lg hover:bg-[#EEBA02] hover:text-black transition"
+          >
+            Logout
+          </button>
 
-            </div>
-          )}
         </div>
+      ) : (
+        <div className="flex items-center gap-3">
 
-      </div>
-    </nav>
-  );
+          <Link to="/login">
+            <button className="text-white hover:text-[#EEBA02] transition">
+              Login
+            </button>
+          </Link>
+
+          <Link to="/register">
+            <button className="bg-[#EEBA02] text-black px-6 py-2 rounded-lg font-bold hover:bg-yellow-400 transition">
+              Get Started
+            </button>
+          </Link>
+
+        </div>
+      )}
+
+    </div>
+
+  </div>
+</nav>
+);
 }
 
 export default Navbar;

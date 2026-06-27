@@ -3,10 +3,20 @@ import mongoose from "mongoose";
 
 const isValidId = (id) => mongoose.Types.ObjectId.isValid(id);
 
+
+
 export const addProduct = async (req, res) => {
   try {
-    // ✅ whitelist fields
-    const { name, description, price, discountPrice, category, image, stock } = req.body;
+    const {
+      name,
+      description,
+      price,
+      discountPrice,
+      category,
+      image,
+      video, // ✅ Added
+      stock,
+    } = req.body;
 
     if (!name || !description || !price || !category || !image) {
       return res.status(400).json({
@@ -31,17 +41,18 @@ export const addProduct = async (req, res) => {
       discountPrice,
       category,
       image,
+      video, // ✅ Save video
       stock,
     });
 
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
       message: "Product Added",
       product,
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Internal server error",
     });
@@ -75,14 +86,14 @@ export const allProducts = async (req, res) => {
 
     const products = await productModel.find(query).sort(sortOption);
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "All products list",
       products,
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Internal server error",
     });
@@ -109,13 +120,13 @@ export const singleProduct = async (req, res) => {
       });
     }
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       product,
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Internal server error",
     });
@@ -135,7 +146,6 @@ export const updateProduct = async (req, res) => {
 
     const { _id, createdAt, updatedAt, __v, ...safeFields } = req.body;
 
-    // ✅ stock negative check
     if (safeFields.stock !== undefined && safeFields.stock < 0) {
       return res.status(400).json({
         success: false,
@@ -156,14 +166,14 @@ export const updateProduct = async (req, res) => {
       });
     }
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Product Updated",
       product,
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Internal server error",
     });
@@ -190,13 +200,13 @@ export const deleteProduct = async (req, res) => {
       });
     }
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Product Deleted",
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Internal server error",
     });

@@ -108,9 +108,9 @@ return (
         Register
       </button>
 
-      <p className="mt-6 text-center text-[#9C9589]">
+      <p className="mt-6 text-center text-[#9C9589] ">
         Already have an account?{" "}
-        <span className="font-semibold text-[#EEBA02]">
+        <span onClick={()=>navigate("/login")} className="font-semibold text-[#EEBA02]">
           Login
         </span>
       </p>
