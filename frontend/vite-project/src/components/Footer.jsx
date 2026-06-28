@@ -69,18 +69,13 @@ function Footer() {
 
           <ul className="space-y-3 text-[#B9B1A5]">
             <li
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/about")}
               className="hover:text-[#EEBA02] cursor-pointer transition"
             >
               About Us
             </li>
 
-            <li
-              onClick={() => navigate("/")}
-              className="hover:text-[#EEBA02] cursor-pointer transition"
-            >
-              Contact
-            </li>
+           
 
             <li
               onClick={() => navigate("/")}
