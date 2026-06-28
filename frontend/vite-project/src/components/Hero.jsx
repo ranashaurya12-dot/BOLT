@@ -30,9 +30,9 @@ function Hero() {
   }}
   className="text-7xl md:text-[8.5rem] uppercase antialiased"
 >
-  <span className="text-[#F5F1E8] block">ENGINEER</span>
+  <span className="text-[#F5F1E8] block">FUEL</span>
   <span className="text-[#F5F1E8] block">YOUR</span>
-  <span className="text-[#EEBA02] block">LIMIT</span>
+  <span className="text-[#EEBA02] block">BODY</span>
 </h1>
       <p className="text-[#B9B1A5] text-lg md:text-xl mt-8 max-w-xl leading-8">
         Premium whey protein, creatine and performance supplements built for

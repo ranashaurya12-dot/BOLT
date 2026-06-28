@@ -47,7 +47,7 @@ function Navbar() {
   const navLinks = [
     { to: "/", label: "Home", icon: <FiHome /> },
     { to: "/shop", label: "Shop", icon: <FiShoppingBag /> },
-    { to: "/about", label: "About", icon: <FiInfo />, onClick: () => navigate("/about") },
+    { to: "/about", label: "ABOUT", icon: <FiInfo />, onClick: () => navigate("/about") },
     ...(user ? [{ to: "/orders", label: "Orders", icon: <FiPackage /> }] : []),
   ];
 
@@ -207,7 +207,7 @@ function Navbar() {
                   </Link>
                   <Link to="/register">
                     <button className="bg-[#EEBA02] text-black px-5 py-2 rounded-lg text-sm font-bold hover:bg-yellow-300 transition-all duration-200 hover:shadow-[0_0_14px_rgba(238,186,2,0.4)]">
-                      Get Started
+                    Sign Up
                     </button>
                   </Link>
                 </>
@@ -318,12 +318,12 @@ function Navbar() {
                 <div className="flex flex-col gap-3">
                   <Link to="/login" className="w-full">
                     <button className="w-full border border-white/20 text-white py-3 rounded-xl font-semibold hover:border-[#EEBA02] hover:text-[#EEBA02] transition-all duration-200">
-                      Login
+                     Login
                     </button>
                   </Link>
                   <Link to="/register" className="w-full">
                     <button className="w-full bg-[#EEBA02] text-black py-3 rounded-xl font-bold hover:bg-yellow-300 transition-all duration-200 hover:shadow-[0_0_18px_rgba(238,186,2,0.45)]">
-                      Get Started
+                      Sign Up
                     </button>
                   </Link>
                 </div>
