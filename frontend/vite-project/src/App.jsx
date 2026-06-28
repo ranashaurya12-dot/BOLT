@@ -17,6 +17,8 @@ import AdminUsers from "./pages/admin/AdminUsers"
 import AddProduct from "./pages/admin/AddProduct";
 import EditProduct from "./pages/admin/EditProduct";
 import About from "./components/about"
+import TermsAndConditions from "./components/Terms"
+import PrivacyPolicy from "./components/ppolicy"
 // ✅ Protected Route
 function ProtectedRoute({ children }) {
   const { user, loading } = useContext(AuthContext)
@@ -40,6 +42,8 @@ function App() {
       <Toaster position="top-right" />
       <Navbar />
       <Routes>
+         <Route path="/privacy" element={<PrivacyPolicy />} />
+         <Route path="/policy" element={<TermsAndConditions />} />
         <Route path="/about" element={<About />} />
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />

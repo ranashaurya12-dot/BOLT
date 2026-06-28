@@ -5,10 +5,9 @@ function Footer() {
 
   return (
     <footer className="bg-[#0D0B09] border-t border-[#2C2418] text-[#F5F1E8] px-8 md:px-20 py-16">
-
       <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
 
-        {/* Brand */}
+        {/* Logo */}
         <div>
           <h1
             style={{ fontFamily: "Oswald, sans-serif" }}
@@ -75,20 +74,18 @@ function Footer() {
               About Us
             </li>
 
-           
-
             <li
-              onClick={() => navigate("/")}
-              className="hover:text-[#EEBA02] cursor-pointer transition"
-            >
-              Shipping Policy
-            </li>
-
-            <li
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/privacy")}
               className="hover:text-[#EEBA02] cursor-pointer transition"
             >
               Privacy Policy
+            </li>
+
+            <li
+              onClick={() => navigate("/policy")}
+              className="hover:text-[#EEBA02] cursor-pointer transition"
+            >
+              Terms & Conditions
             </li>
           </ul>
         </div>
@@ -99,18 +96,27 @@ function Footer() {
             Contact
           </h2>
 
-          <p className="text-[#B9B1A5]">
-            boltfuelindia@gmail.com
-          </p>
+          <a
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=boltfuelindia@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#B9B1A5] hover:text-[#EEBA02] transition block"
+          >
+            📧 boltfuelindia@gmail.com
+          </a>
 
-          <p className="text-[#B9B1A5] mt-3">
-            +91 8447445621
-          </p>
+          <a
+            href="tel:+918447445621"
+            className="text-[#B9B1A5] hover:text-[#EEBA02] transition block mt-3"
+          >
+            📞 +91 8447445621
+          </a>
 
           <div className="mt-6 border border-[#8C7437] rounded-lg p-4">
             <p className="text-[#EEBA02] font-semibold">
               ✔ Secure Checkout
             </p>
+
             <p className="text-[#9C9589] text-sm mt-2">
               100% Safe Payments
             </p>
@@ -119,15 +125,14 @@ function Footer() {
 
       </div>
 
+      {/* Bottom */}
       <div className="border-t border-[#2C2418] mt-14 pt-6 flex flex-col md:flex-row justify-between items-center text-[#7E7668]">
-        <p>
-          © 2026 BOLT FUEL. ALL RIGHTS RESERVED.
-        </p>
+        <p>© 2026 BOLT FUEL. ALL RIGHTS RESERVED.</p>
+
         <p className="uppercase tracking-widest mt-4 md:mt-0">
           ENGINEER YOUR LIMIT
         </p>
       </div>
-
     </footer>
   );
 }
