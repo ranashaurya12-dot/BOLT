@@ -185,7 +185,7 @@ return (
                 {item.product ? (
                   <>
                     <img
-                      src={item.product.image}
+                      src={item.product.images[0]}
                       alt={item.product.name}
                       className="h-24 w-24 rounded-lg border border-[#2C2418] object-cover"
                     />
@@ -201,7 +201,7 @@ return (
                     </div>
 
                     <p className="text-2xl font-bold text-[#EEBA02]">
-                      ₹{item.product.price * item.quantity}
+                      ₹{item.product.discountPrice * item.quantity}
                     </p>
                   </>
                 ) : (

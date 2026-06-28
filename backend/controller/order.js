@@ -37,10 +37,18 @@ export const placeOrder = async (req, res) => {
       quantity: item.quantity,
     }));
 
+    // FIX: use discountPrice (selling price) if set, else fall back to price
     let totalAmount = 0;
     cartItems.forEach((item) => {
-      totalAmount += item.product.price * item.quantity;
+      const effectivePrice =
+        item.product.discountPrice > 0
+          ? item.product.discountPrice
+          : item.product.price;
+      totalAmount += effectivePrice * item.quantity;
     });
+
+    // Add shipping
+    totalAmount += 99;
 
     for (const item of cartItems) {
       item.product.stock -= item.quantity;
@@ -123,7 +131,7 @@ export const cancelOrder = async (req, res) => {
       });
     }
 
-    // ✅ ownership check
+    // ownership check
     if (order.user.toString() !== req.user.id) {
       await session.abortTransaction();
       session.endSession();
@@ -133,7 +141,7 @@ export const cancelOrder = async (req, res) => {
       });
     }
 
-    // ✅ already cancelled
+    // already cancelled
     if (order.status === "Cancelled") {
       await session.abortTransaction();
       session.endSession();
@@ -143,7 +151,7 @@ export const cancelOrder = async (req, res) => {
       });
     }
 
-    // ✅ delivered cannot cancel
+    // delivered cannot cancel
     if (order.status === "Delivered") {
       await session.abortTransaction();
       session.endSession();
@@ -153,7 +161,7 @@ export const cancelOrder = async (req, res) => {
       });
     }
 
-    // ✅ shipped cannot cancel
+    // shipped cannot cancel
     if (order.status === "Shipped") {
       await session.abortTransaction();
       session.endSession();
