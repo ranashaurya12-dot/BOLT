@@ -4,14 +4,13 @@ import "dotenv/config.js";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
-
 import { mongoConnect } from "./config/mongo.js";
 import userRouter from "./routes/userrouter.js";
 import productRouter from "./routes/product.js";
 import cartRouter from "./routes/cart.js";
 import orderRouter from "./routes/order.js";
 import adminRouter from "./routes/adminroute.js";
-
+import router from "./routes/reviewroute.js";
 const app = express();
 
 mongoConnect();
@@ -63,7 +62,7 @@ app.use("/api/product", productRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
 app.use("/api/admin", adminRouter);
-
+app.use("/api/reviews",router)
 // Global Error Handler
 app.use((err, req, res, next) => {
   console.error(err);
