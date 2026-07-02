@@ -199,9 +199,18 @@ function Orders() {
                           <h2 className="font-['Oswald'] text-lg font-bold italic uppercase tracking-tight text-[#F5F1E8]">
                             {item.product.name}
                           </h2>
+
                           <p className="mt-1 text-sm text-[#9C9589]">
                             Quantity: {item.quantity}
                           </p>
+
+                          {item.flavour && (
+                            <div className="mt-2">
+                              <span className="rounded-full bg-[#EEBA02] px-3 py-1 text-xs font-bold uppercase tracking-wide text-black">
+                                {item.flavour}
+                              </span>
+                            </div>
+                          )}
                         </div>
                       </div>
 
@@ -213,6 +222,14 @@ function Orders() {
                         <p className="mt-2 text-[#9C9589]">
                           Quantity: {item.quantity}
                         </p>
+
+                        {item.flavour && (
+                          <div className="mt-2">
+                            <span className="rounded-full bg-[#EEBA02] px-3 py-1 text-xs font-bold uppercase tracking-wide text-black">
+                              {item.flavour}
+                            </span>
+                          </div>
+                        )}
                       </div>
 
                       <p className="text-lg sm:text-2xl font-bold text-[#EEBA02] w-full sm:w-auto text-right sm:text-left">

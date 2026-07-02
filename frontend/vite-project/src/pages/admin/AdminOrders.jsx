@@ -219,6 +219,13 @@ const activeOrders = orders.filter((o) => o.status !== "Cancelled");
                           <span className="text-gray-400">
                             Qty: {item?.quantity}
                           </span>
+                          {item.flavour && (
+  <div className="mt-2">
+    <span className="rounded-full bg-[#EEBA02] px-3 py-1 text-xs font-bold uppercase tracking-wide text-black">
+      {item.flavour}
+    </span>
+  </div>
+)}
                         </div>
                       ))}
                     </div>

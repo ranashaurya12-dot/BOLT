@@ -127,7 +127,7 @@ function About() {
             { icon: "🏆", title: "Athlete Approved", desc: "Trusted by athletes across India" },
             { icon: "🌿", title: "Clean Ingredients", desc: "No fillers, no artificial colors, no compromises" },
             { icon: "📦", title: "Fast Delivery", desc: "Pan India delivery within 3-5 business days" },
-            { icon: "💯", title: "Money Back", desc: "30-day money back guarantee on all products" },
+          
           ].map((item, index) => (
             <div
               key={index}
