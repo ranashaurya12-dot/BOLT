@@ -342,6 +342,9 @@ root: {
     alignItems: "center",
     zIndex: 10,
   },
+
+
+
   dot: {
     height: 8,
     borderRadius: 4,
