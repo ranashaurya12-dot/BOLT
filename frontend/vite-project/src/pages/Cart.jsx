@@ -188,7 +188,14 @@ function Cart() {
                       </p>
                     )}
                   </div>
-
+                       {item.flavour && (
+  <div className="mt-2 flex items-center gap-2">
+    <span className="text-sm text-[#9C9589]">Flavour:</span>
+    <span className="rounded-full bg-[#EEBA02] px-3 py-1 text-xs font-bold uppercase tracking-wide text-black">
+      {item.flavour}
+    </span>
+  </div>
+)}
                   <p className="mt-3 text-sm text-[#9C9589]">
                     Subtotal:
                     <span className="ml-2 font-bold text-[#EEBA02]">

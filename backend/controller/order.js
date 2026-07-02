@@ -35,6 +35,7 @@ export const placeOrder = async (req, res) => {
     const products = cartItems.map((item) => ({
       product: item.product._id,
       quantity: item.quantity,
+       flavour: item.flavour,
     }));
 
     // FIX: use discountPrice (selling price) if set, else fall back to price
