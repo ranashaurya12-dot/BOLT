@@ -3,13 +3,19 @@ import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import toast from "react-hot-toast";
-
+import {Icon} from 'react-icons-kit';
+import { FiEye, FiEyeOff } from "react-icons/fi";
 function Login() {
+
   const { setUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const[visble,setvisble]=useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const toggle=()=>{
+         setvisble(!visble);
+  }
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -79,20 +85,31 @@ function Login() {
         </div>
 
         {/* Password */}
-        <div className="mb-8">
-          <label className="block font-['Oswald'] text-xs uppercase tracking-[2px] text-[#8C7437] mb-2">
-            Password
-          </label>
+    {/* Password */}
+<div className="mb-8">
+  <label className="block font-['Oswald'] text-xs uppercase tracking-[2px] text-[#8C7437] mb-2">
+    Password
+  </label>
 
-          <input
-            type="password"
-            placeholder="••••••••"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="w-full rounded-lg border border-[#2C2418] bg-[#0D0B09] p-4 text-[#F5F1E8] placeholder-[#6F685C] outline-none transition-all duration-300 focus:border-[#EEBA02]"
-          />
-        </div>
+  <div className="relative">
+    <input
+      type={visble ? "text" : "password"}
+      placeholder="••••••••"
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+      required
+      className="w-full rounded-lg border border-[#2C2418] bg-[#0D0B09] p-4 pr-12 text-[#F5F1E8] placeholder-[#6F685C] outline-none transition-all duration-300 focus:border-[#EEBA02]"
+    />
+{/* absolute right-4 top-0 h-full  */}
+    <button
+      type="button"
+      onClick={toggle}
+      className="  absolute right-4 bottom-4 text-[#9C9589] hover:text-[#EEBA02]"
+    >
+      {visble ? <FiEyeOff size={22} /> : <FiEye size={22} />}
+    </button>
+  </div>
+</div>
 
         <button
           type="submit"

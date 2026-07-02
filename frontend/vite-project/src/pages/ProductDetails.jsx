@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { AuthContext } from "../context/AuthContext";
+import ProductReviews from "../components/ProductReviews";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -11,25 +12,33 @@ function ProductDetails() {
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [selectedFlavour, setSelectedFlavour] = useState("");
   const [selectedMedia, setSelectedMedia] = useState({
     type: "image",
     index: 0,
   });
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const response = await axios.get(
-          `https://bolt-cfp7.onrender.com/api/product/single-product/${id}`
-        );
-        setProduct(response.data.product);
-        setSelectedMedia({ type: "image", index: 0 });
-      } catch (error) {
-        toast.error("Failed to load product");
-      }
-    };
+  const fetchProduct = async () => {
+    try {
+      const response = await axios.get(
+        `https://bolt-cfp7.onrender.com/api/product/single-product/${id}`
+      );
 
+      setProduct(response.data.product);
+
+      if (response.data.product.flavours?.length > 0) {
+        setSelectedFlavour(response.data.product.flavours[0]);
+      }
+
+      setSelectedMedia({ type: "image", index: 0 });
+    } catch (error) {
+      toast.error("Failed to load product");
+    }
+  };
+
+  useEffect(() => {
     fetchProduct();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const handleAddToCart = async () => {
@@ -47,6 +56,7 @@ function ProductDetails() {
         {
           productId: product._id,
           quantity: 1,
+          flavour: selectedFlavour,
         },
         {
           withCredentials: true,
@@ -76,11 +86,7 @@ function ProductDetails() {
   return (
     <div className="min-h-screen bg-[#0D0B09] px-6 py-14 md:px-10 lg:px-16">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 rounded-lg border border-[#2C2418] bg-[#15120F] p-8 lg:p-10 shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
-
-        {/* Product Media */}
         <div>
-
-          {/* Main Media Display */}
           <div className="overflow-hidden rounded-lg border border-[#2C2418]">
             {selectedMedia.type === "video" ? (
               <video
@@ -98,19 +104,14 @@ function ProductDetails() {
             )}
           </div>
 
-          {/* Thumbnails */}
           {(product.images?.length > 0 || product.video) && (
             <div className="mt-4 flex gap-3 overflow-x-auto pb-2">
-
-              {/* Image thumbnails */}
               {product.images?.map((img, index) => (
                 <img
                   key={index}
                   src={img}
                   alt={`Thumbnail ${index + 1}`}
-                  onClick={() =>
-                    setSelectedMedia({ type: "image", index })
-                  }
+                  onClick={() => setSelectedMedia({ type: "image", index })}
                   className={`w-20 h-20 rounded-lg cursor-pointer object-contain bg-[#15120F] border-2 flex-shrink-0 transition-all duration-200 ${
                     selectedMedia.type === "image" &&
                     selectedMedia.index === index
@@ -120,7 +121,6 @@ function ProductDetails() {
                 />
               ))}
 
-              {/* Video thumbnail */}
               {product.video && (
                 <div
                   onClick={() =>
@@ -135,15 +135,11 @@ function ProductDetails() {
                   <span className="text-3xl">▶</span>
                 </div>
               )}
-
             </div>
           )}
-
         </div>
 
-        {/* Product Info */}
         <div className="flex flex-col justify-center">
-
           <p className="font-['Oswald'] text-sm uppercase italic tracking-[4px] text-[#8C7437]">
             {product.category}
           </p>
@@ -178,8 +174,32 @@ function ProductDetails() {
               : "Out of Stock"}
           </p>
 
-          <div className="mt-12 flex flex-col sm:flex-row gap-5">
+          {product.flavours && product.flavours.length > 0 && (
+            <div className="mt-8">
+              <p className="font-['Oswald'] text-sm uppercase tracking-[2px] text-[#8C7437]">
+                Select Flavour
+              </p>
 
+              <div className="mt-3 flex flex-wrap gap-3">
+                {product.flavours.map((flavour, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    onClick={() => setSelectedFlavour(flavour)}
+                    className={`rounded-lg px-5 py-2 font-semibold uppercase tracking-wide transition-all duration-200 ${
+                      selectedFlavour === flavour
+                        ? "bg-[#EEBA02] text-black"
+                        : "border border-[#2C2418] bg-[#0D0B09] text-[#F5F1E8] hover:border-[#EEBA02]"
+                    }`}
+                  >
+                    {flavour}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="mt-12 flex flex-col sm:flex-row gap-5">
             <button
               onClick={handleAddToCart}
               disabled={loading || product.stock === 0}
@@ -189,8 +209,8 @@ function ProductDetails() {
             </button>
 
             <button
-              onClick={() => {
-                handleAddToCart();
+              onClick={async () => {
+                await handleAddToCart();
                 navigate("/cart");
               }}
               disabled={loading || product.stock === 0}
@@ -198,12 +218,16 @@ function ProductDetails() {
             >
               Buy Now
             </button>
-
           </div>
-
         </div>
-
       </div>
+
+      <ProductReviews
+        productId={product._id}
+        avgRating={product.rating}
+        numReviews={product.numReviews}
+        onReviewChange={fetchProduct}
+      />
     </div>
   );
 }

@@ -4,7 +4,7 @@ import productModel from "../model/products.js";
 
 export const addToCart = async (req, res) => {
   try {
-    const { productId, quantity } = req.body;
+    const { productId, quantity, flavour } = req.body;
 
     if (!productId || !mongoose.Types.ObjectId.isValid(productId)) {
       return res.status(400).json({
@@ -41,6 +41,7 @@ export const addToCart = async (req, res) => {
     const existingCart = await cartModel.findOne({
       user: req.user.id,
       product: productId,
+      flavour,
     });
 
     if (existingCart) {
@@ -65,6 +66,7 @@ export const addToCart = async (req, res) => {
       user: req.user.id,
       product: productId,
       quantity: qty,
+      flavour,
     });
 
     return res.status(201).json({

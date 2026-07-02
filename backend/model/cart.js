@@ -18,6 +18,11 @@ const cartSchema = new mongoose.Schema(
       type: Number,
       default: 1,
     },
+
+    flavour: {
+      type: String,
+      default: "",
+    },
   },
   {
     timestamps: true,
